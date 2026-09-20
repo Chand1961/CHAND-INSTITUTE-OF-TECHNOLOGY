@@ -202,9 +202,19 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         return;
     }
 
-    const { data, error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: password
+    alert("STEP 2 - SIGNUP STARTING");
+
+const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password
+});
+
+if (error) {
+    alert("SUPABASE ERROR: " + error.message);
+    return;
+}
+
+alert("STEP 3 - SUPABASE SIGNUP SUCCESS");
     });
 
     if (error) {
