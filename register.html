@@ -178,7 +178,6 @@ Already have an account?
 
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase.js"></script>
 
@@ -188,7 +187,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
     event.preventDefault();
 
-    alert("Registration button is working!");
+    alert("STEP 1");
 
     const fullName = document.getElementById("fullName").value;
     const phone = document.getElementById("phone").value;
@@ -202,25 +201,19 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         return;
     }
 
-    alert("STEP 2 - SIGNUP STARTING");
+    alert("STEP 2");
 
-const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password
-});
-
-if (error) {
-    alert("SUPABASE ERROR: " + error.message);
-    return;
-}
-
-alert("STEP 3 - SUPABASE SIGNUP SUCCESS");
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password
     });
 
     if (error) {
-        alert(error.message);
+        alert("SUPABASE ERROR: " + error.message);
         return;
     }
+
+    alert("STEP 3 - ACCOUNT CREATED");
 
     if (!data.user) {
         alert("Registration started. Please check your email.");
@@ -237,7 +230,7 @@ alert("STEP 3 - SUPABASE SIGNUP SUCCESS");
         });
 
     if (profileError) {
-        alert(profileError.message);
+        alert("PROFILE ERROR: " + profileError.message);
         return;
     }
 
