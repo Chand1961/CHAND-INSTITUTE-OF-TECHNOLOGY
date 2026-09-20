@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Register - CHAND COMPUTER COURSE</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+}
+
+header{
+    background:#123c69;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+}
+
+.container{
+    max-width:500px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.form-box{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
+}
+
+h2{
+    text-align:center;
+    color:#123c69;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:14px;
+    border:none;
+    border-radius:7px;
+    background:#123c69;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-link{
+    text-align:center;
+    margin-top:20px;
+}
+
+.login-link a{
+    color:#123c69;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>CHAND COMPUTER COURSE</h1>
+    <p><a href="index.html">← Back to Home</a></p>
+</header>
+
+<div class="container">
+
+<div class="form-box">
+
+<h2>Student Registration</h2>
+
+<form id="registerForm">
+
+<label>Full Name</label>
+<input
+    type="text"
+    id="fullName"
+    placeholder="Enter your full name"
+    required
+>
+
+<label>Phone Number</label>
+<input
+    type="tel"
+    id="phone"
+    placeholder="Enter phone number"
+    required
+>
+
+<label>Email Address</label>
+<input
+    type="email"
+    id="email"
+    placeholder="Enter email address"
+    required
+>
+
+<label>Select Course</label>
+
+<select id="course" required>
+
+<option value="">
+-- Select Course --
+</option>
+
+<option>Computer Basics</option>
+<option>Microsoft Word</option>
+<option>Microsoft Excel</option>
+<option>Internet & Email</option>
+<option>Web Design</option>
+<option>Database</option>
+
+</select>
+
+<label>Password</label>
+
+<input
+    type="password"
+    id="password"
+    placeholder="Create password"
+    required
+>
+
+<label>Confirm Password</label>
+
+<input
+    type="password"
+    id="confirmPassword"
+    placeholder="Confirm password"
+    required
+>
+
+<button type="submit">
+CREATE ACCOUNT
+</button>
+
+</form>
+
+<div class="login-link">
+Already have an account?
+<a href="login.html">Login</a>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("registerForm").addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    if(password !== confirmPassword){
+
+        alert("Passwords do not match!");
+
+        return;
+    }
+
+    alert("Registration form is working!");
+
+});
+
+</script>
+
+</body>
+</html>
