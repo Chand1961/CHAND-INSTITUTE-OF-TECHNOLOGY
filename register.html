@@ -196,7 +196,7 @@ Already have an account?
         return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await supabaseClient.auth.signUp({
         email: email,
         password: password
     });
@@ -211,7 +211,7 @@ Already have an account?
         return;
     }
 
-    const { error: profileError } = await supabase
+   const { error: profileError } = await supabaseClient
         .from("profiles")
         .insert({
             id: data.user.id,
