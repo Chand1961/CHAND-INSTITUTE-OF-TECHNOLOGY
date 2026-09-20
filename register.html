@@ -179,11 +179,16 @@ Already have an account?
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
 
-</script>
+<script>
+
+document.getElementById("registerForm").addEventListener("submit", async function(event) {
+
+    event.preventDefault();
 
     alert("Registration button is working!");
-  alert("STEP 2");
 
     const fullName = document.getElementById("fullName").value;
     const phone = document.getElementById("phone").value;
@@ -212,7 +217,7 @@ Already have an account?
         return;
     }
 
-   const { error: profileError } = await supabaseClient
+    const { error: profileError } = await supabaseClient
         .from("profiles")
         .insert({
             id: data.user.id,
@@ -233,15 +238,6 @@ Already have an account?
 });
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase.js"></script>
 
-<script>
-document.getElementById("registerForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    
-});
-</script>
 </body>
 </html>
