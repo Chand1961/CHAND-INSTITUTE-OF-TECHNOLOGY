@@ -177,7 +177,6 @@ Already have an account?
 </div>
 
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase.js"></script>
 
@@ -186,8 +185,6 @@ Already have an account?
 document.getElementById("registerForm").addEventListener("submit", async function(event) {
 
     event.preventDefault();
-
-    alert("STEP 1");
 
     const fullName = document.getElementById("fullName").value;
     const phone = document.getElementById("phone").value;
@@ -201,8 +198,6 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         return;
     }
 
-    alert("STEP 2");
-
     const { data, error } = await supabaseClient.auth.signUp({
         email: email,
         password: password
@@ -213,28 +208,12 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         return;
     }
 
-    alert("STEP 3 - ACCOUNT CREATED");
-
     if (!data.user) {
         alert("Registration started. Please check your email.");
         return;
     }
 
-    const { error: profileError } = await supabaseClient
-        .from("profiles")
-        .insert({
-            id: data.user.id,
-            full_name: fullName,
-            phone: phone,
-            course: course
-        });
-
-    if (profileError) {
-        alert("PROFILE ERROR: " + profileError.message);
-        return;
-    }
-
-    alert("Registration successful! Check your email to verify your account.");
+    alert("Registration successful! Check your email and verify your account.");
 
     document.getElementById("registerForm").reset();
 
