@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CHAND COMPUTER COURSE</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#222;
+}
+
+header{
+    background:#123c69;
+    color:white;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+    font-weight:bold;
+}
+
+.hero{
+    min-height:500px;
+    background:linear-gradient(135deg,#123c69,#1d75b9);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.hero h1{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+    background:#ffd43b;
+    color:#222;
+    padding:14px 25px;
+    border-radius:7px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+section{
+    padding:60px 7%;
+}
+
+.title{
+    text-align:center;
+    color:#123c69;
+    margin-bottom:35px;
+}
+
+.courses{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
+}
+
+.card h3{
+    color:#123c69;
+    margin-bottom:12px;
+}
+
+.about{
+    background:white;
+    text-align:center;
+}
+
+footer{
+    background:#123c69;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:600px){
+    header{
+        justify-content:center;
+        gap:15px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    nav a{
+        margin:5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+CHAND COMPUTER COURSE
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="register.html">Register</a>
+<a href="login.html">Login</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div>
+
+<h1>Learn Computer Skills Online</h1>
+
+<p>
+Study computer courses step by step from anywhere.
+</p>
+
+<a href="register.html" class="btn">
+START LEARNING
+</a>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title">
+Our Courses
+</h2>
+
+<div class="courses">
+
+<div class="card">
+<h3>Computer Basics</h3>
+<p>
+Learn fundamental computer skills and how computers work.
+</p>
+</div>
+
+<div class="card">
+<h3>Microsoft Word</h3>
+<p>
+Learn document creation, formatting and professional typing.
+</p>
+</div>
+
+<div class="card">
+<h3>Microsoft Excel</h3>
+<p>
+Learn spreadsheets, formulas, calculations and data management.
+</p>
+</div>
+
+<div class="card">
+<h3>Internet & Email</h3>
+<p>
+Learn internet usage, email communication and online safety.
+</p>
+</div>
+
+<div class="card">
+<h3>Web Design</h3>
+<p>
+Learn HTML, CSS and JavaScript to build modern websites.
+</p>
+</div>
+
+<div class="card">
+<h3>Database</h3>
+<p>
+Learn how information is stored, managed and retrieved.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="about">
+
+<h2 class="title">
+About CHAND COMPUTER COURSE
+</h2>
+
+<p>
+CHAND COMPUTER COURSE is an online learning platform
+designed to help students develop practical computer and
+information technology skills.
+</p>
+
+</section>
+
+<footer>
+
+<p>© 2026 CHAND COMPUTER COURSE</p>
+<p>Online Computer Learning Platform</p>
+
+</footer>
+
+</body>
+</html>
