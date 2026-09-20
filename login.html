@@ -145,18 +145,40 @@ Create Account
 </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
 
 <script>
 
-document.getElementById("loginForm").addEventListener("submit", function(event){
+document.getElementById("loginForm").addEventListener("submit", async function(event){
 
     event.preventDefault();
 
-    alert("Login page is working!");
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    alert("Login successful!");
 
 });
 
 </script>
+
+</body>
+</html>
+
+
+
+
 
 </body>
 </html>
