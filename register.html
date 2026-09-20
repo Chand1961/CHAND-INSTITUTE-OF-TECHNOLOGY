@@ -187,21 +187,13 @@ document.getElementById("registerForm").addEventListener("submit", function(even
     const password =
         document.getElementById("password").value;
 
-    const confirmPassword =
-        document.getElementById("confirmPassword").value;
+    <script>
 
-    if(password !== confirmPassword){
-
-        alert("Passwords do not match!");
-
-        return;
-    }
-
-
-document.getElementById("registerForm").addEventListener("submit", async function(event){
-    alert("Registration button is working!");
+document.getElementById("registerForm").addEventListener("submit", async function(event) {
 
     event.preventDefault();
+
+    alert("Registration button is working!");
 
     const fullName = document.getElementById("fullName").value;
     const phone = document.getElementById("phone").value;
@@ -210,7 +202,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    if(password !== confirmPassword){
+    if (password !== confirmPassword) {
         alert("Passwords do not match!");
         return;
     }
@@ -220,8 +212,13 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         password: password
     });
 
-    if(error){
+    if (error) {
         alert(error.message);
+        return;
+    }
+
+    if (!data.user) {
+        alert("Registration started. Please check your email.");
         return;
     }
 
@@ -234,7 +231,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
             course: course
         });
 
-    if(profileError){
+    if (profileError) {
         alert(profileError.message);
         return;
     }
