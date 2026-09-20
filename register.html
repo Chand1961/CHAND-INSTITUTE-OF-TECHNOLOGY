@@ -178,60 +178,7 @@ Already have an account?
 
 </div>
 
-<script>
 
-document.getElementById("registerForm").addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    alert("Registration button is working!");
-
-    const fullName = document.getElementById("fullName").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const course = document.getElementById("course").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-
-    if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-    }
-
-    const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password
-    });
-
-    if (error) {
-        alert(error.message);
-        return;
-    }
-
-    if (!data.user) {
-        alert("Registration started. Please check your email.");
-        return;
-    }
-
-    const { error: profileError } = await supabase
-        .from("profiles")
-        .insert({
-            id: data.user.id,
-            full_name: fullName,
-            phone: phone,
-            course: course
-        });
-
-    if (profileError) {
-        alert(profileError.message);
-        return;
-    }
-
-    alert("Registration successful! Check your email to verify your account.");
-
-    document.getElementById("registerForm").reset();
-
-});
 
 </script>
 
