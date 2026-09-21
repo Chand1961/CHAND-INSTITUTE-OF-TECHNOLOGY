@@ -1,26 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Login - CHAND COMPUTER COURSE</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    min-height:100vh;
+}
+
+header{
+    background:#123c69;
+    color:white;
+    padding:25px 15px;
+    text-align:center;
+}
+
+header h1{
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.login-box{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.12);
+}
+
+.login-box h2{
+    text-align:center;
+    color:#123c69;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+    margin-top:18px;
+    color:#333;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#123c69;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:25px;
+    background:#123c69;
+    color:white;
+    border:none;
+    border-radius:7px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0d2e50;
+}
+
+button:disabled{
+    background:#777;
+    cursor:not-allowed;
+}
+
+.message{
+    margin-top:18px;
+    padding:12px;
+    border-radius:6px;
+    text-align:center;
+    display:none;
+}
+
+.register-link{
+    text-align:center;
+    margin-top:22px;
+}
+
+.register-link a{
+    color:#123c69;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<h1>CHAND COMPUTER COURSE</h1>
+
+<p>
+<a href="index.html">← Back to Home</a>
+</p>
+
+</header>
+
+
+<div class="container">
+
+<div class="login-box">
+
+<h2>Student Login</h2>
+
+
+<form id="loginForm">
+
+
+<label for="email">
+Email Address
+</label>
+
+<input
+    type="email"
+    id="email"
+    placeholder="Enter your email"
+    required
+>
+
+
+<label for="password">
+Password
+</label>
+
+<input
+    type="password"
+    id="password"
+    placeholder="Enter your password"
+    required
+>
+
+
+<button
+    type="submit"
+    id="loginButton"
+>
+LOGIN
+</button>
+
+
+<div
+    id="message"
+    class="message"
+></div>
+
+
+</form>
+
+
+<div class="register-link">
+
+<p>
+Don't have an account?
+</p>
+
+<br>
+
+<a href="register.html">
+Create Account
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+
 <script>
 
-document.getElementById("loginForm").addEventListener("submit", async function(event){
+const loginForm = document.getElementById("loginForm");
+
+const loginButton = document.getElementById("loginButton");
+
+const message = document.getElementById("message");
+
+
+loginForm.addEventListener("submit", async function(event){
 
     event.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-    });
+    const email =
+        document.getElementById("email").value.trim();
 
-    if(error){
-        alert("LOGIN ERROR: " + error.message);
+    const password =
+        document.getElementById("password").value;
+
+
+    if(!email || !password){
+
+        showMessage(
+            "Please enter your email and password.",
+            "error"
+        );
+
         return;
     }
 
-    alert("Login successful!");
 
-    window.location.href = "dashboard.html";
+    loginButton.disabled = true;
+
+    loginButton.innerText = "LOGGING IN...";
+
+
+    try{
+
+        const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+
+                email: email,
+
+                password: password
+
+            });
+
+
+        if(error){
+
+            showMessage(
+                "LOGIN ERROR: " + error.message,
+                "error"
+            );
+
+            loginButton.disabled = false;
+
+            loginButton.innerText = "LOGIN";
+
+            return;
+        }
+
+
+        if(!data.user){
+
+            showMessage(
+                "Login failed. Please try again.",
+                "error"
+            );
+
+            loginButton.disabled = false;
+
+            loginButton.innerText = "LOGIN";
+
+            return;
+        }
+
+
+        showMessage(
+            "Login successful! Opening your account...",
+            "success"
+        );
+
+
+        setTimeout(function(){
+
+            window.location.href = "dashboard.html";
+
+        },1500);
+
+
+    }catch(error){
+
+        showMessage(
+            "Something went wrong: " + error.message,
+            "error"
+        );
+
+        loginButton.disabled = false;
+
+        loginButton.innerText = "LOGIN";
+
+    }
 
 });
 
+
+function showMessage(text,type){
+
+    message.style.display = "block";
+
+    message.innerText = text;
+
+
+    if(type === "error"){
+
+        message.style.background = "#ffe5e5";
+
+        message.style.color = "#b00020";
+
+    }
+
+
+    if(type === "success"){
+
+        message.style.background = "#e5ffe9";
+
+        message.style.color = "#087f23";
+
+    }
+
+}
+
 </script>
+
+
+</body>
+
+</html>
