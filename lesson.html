@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lesson - CHAND INSTITUTE OF TECHNOLOGY</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#222;
+}
+
+header{
+    background:#123c69;
+    color:white;
+    padding:25px;
+    text-align:center;
+}
+
+header h1{
+    margin-bottom:8px;
+}
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:30px auto;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:25px;
+    text-decoration:none;
+    color:#123c69;
+    font-weight:bold;
+}
+
+.lesson-box{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.lesson-box h2{
+    color:#123c69;
+    margin-bottom:20px;
+}
+
+.lesson-content{
+    line-height:1.8;
+    color:#444;
+}
+
+.lesson-content h3{
+    color:#123c69;
+    margin-top:25px;
+    margin-bottom:10px;
+}
+
+.lesson-content p{
+    margin-bottom:15px;
+}
+
+.loading{
+    text-align:center;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+}
+
+.error{
+    background:#ffe5e5;
+    color:#b00020;
+    padding:15px;
+    border-radius:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>CHAND INSTITUTE OF TECHNOLOGY</h1>
+
+<p>Online Learning Platform</p>
+
+</header>
+
+
+<div class="container">
+
+<a href="javascript:history.back()" class="back">
+← Back
+</a>
+
+
+<div id="loading" class="loading">
+
+Loading lesson...
+
+</div>
+
+
+<div
+    id="error"
+    class="error"
+    style="display:none;"
+></div>
+
+
+<div
+    id="lessonContent"
+    class="lesson-box"
+    style="display:none;"
+>
+
+<h2 id="lessonTitle">
+Lesson 1
+</h2>
+
+
+<div class="lesson-content">
+
+<h3>Introduction to the Course</h3>
+
+<p>
+Welcome to CHAND INSTITUTE OF TECHNOLOGY.
+This lesson introduces you to the course and explains
+what you are going to learn.
+</p>
+
+
+<h3>Lesson Content</h3>
+
+<p>
+In this lesson, you will learn the basic concepts related
+to your selected course. You will also understand the
+important topics that will be covered throughout the course.
+</p>
+
+
+<h3>What You Will Learn</h3>
+
+<p>
+After completing this lesson, you should understand the
+basic ideas of the course and be ready to continue with
+the next lessons.
+</p>
+
+
+<h3>Conclusion</h3>
+
+<p>
+This is the first step in your learning journey.
+Make sure you understand the lesson before continuing
+to the next topic.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+
+<script>
+
+async function loadLesson(){
+
+    const loading =
+        document.getElementById("loading");
+
+    const errorBox =
+        document.getElementById("error");
+
+    const lessonContent =
+        document.getElementById("lessonContent");
+
+
+    /* CHECK LOGIN */
+
+    const {
+        data: userData,
+        error: userError
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if(userError || !userData.user){
+
+        window.location.href = "login.html";
+
+        return;
+
+    }
+
+
+    /* GET INFORMATION FROM URL */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const courseId =
+        params.get("course_id");
+
+
+    const lessonId =
+        params.get("lesson_id");
+
+
+    if(!courseId || !lessonId){
+
+        loading.style.display = "none";
+
+        errorBox.style.display = "block";
+
+        errorBox.innerText =
+            "Lesson information is missing.";
+
+        return;
+
+    }
+
+
+    /* SHOW LESSON */
+
+    document.getElementById("lessonTitle")
+        .innerText =
+        "Lesson " + lessonId;
+
+
+    loading.style.display = "none";
+
+    lessonContent.style.display = "block";
+
+}
+
+
+loadLesson();
+
+</script>
+
+</body>
+
+</html>
