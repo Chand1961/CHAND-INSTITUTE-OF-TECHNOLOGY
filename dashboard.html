@@ -23,8 +23,6 @@ body{
     color:#333;
 }
 
-/* HEADER */
-
 header{
     background:#123c69;
     color:white;
@@ -48,21 +46,11 @@ header h1{
     font-weight:bold;
 }
 
-.logout-btn:hover{
-    background:#b52b27;
-}
-
-
-/* MAIN */
-
 .container{
     max-width:1100px;
     margin:30px auto;
     padding:20px;
 }
-
-
-/* WELCOME */
 
 .welcome{
     background:white;
@@ -77,8 +65,33 @@ header h1{
     margin-bottom:10px;
 }
 
+.profile{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 12px rgba(0,0,0,0.08);
+    margin-bottom:25px;
+}
 
-/* CARDS */
+.profile h2{
+    color:#123c69;
+    margin-bottom:20px;
+}
+
+.profile-row{
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+.profile-row:last-child{
+    border-bottom:none;
+}
+
+.profile-row strong{
+    display:inline-block;
+    width:130px;
+    color:#555;
+}
 
 .dashboard-grid{
     display:grid;
@@ -113,32 +126,18 @@ header h1{
     cursor:pointer;
 }
 
-.card button:hover{
-    background:#0d2e50;
+.loading{
+    text-align:center;
+    padding:20px;
 }
 
-
-/* PROFILE */
-
-.profile{
-    background:white;
-    padding:25px;
-    margin-top:25px;
-    border-radius:10px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.08);
+.error{
+    background:#ffe5e5;
+    color:#b00020;
+    padding:15px;
+    border-radius:7px;
+    margin-top:15px;
 }
-
-.profile h2{
-    color:#123c69;
-    margin-bottom:20px;
-}
-
-.profile p{
-    margin:10px 0;
-}
-
-
-/* MOBILE */
 
 @media(max-width:768px){
 
@@ -150,6 +149,11 @@ header h1{
 
     .dashboard-grid{
         grid-template-columns:1fr;
+    }
+
+    .profile-row strong{
+        display:block;
+        margin-bottom:5px;
     }
 
 }
@@ -176,45 +180,97 @@ LOGOUT
 </header>
 
 
-
 <div class="container">
 
-
-<!-- WELCOME -->
 
 <div class="welcome">
 
 <h2>
-Welcome, Student 👋
+Welcome, <span id="welcomeName">Student</span> 👋
 </h2>
 
 <p>
-Welcome to your student dashboard. From here you can access your courses, lessons, learning materials and progress.
+Welcome to your student dashboard.
 </p>
 
 </div>
 
 
+<!-- STUDENT PROFILE -->
 
-<!-- DASHBOARD CARDS -->
+<div class="profile">
+
+<h2>👤 My Profile</h2>
+
+
+<div id="profileLoading" class="loading">
+Loading your information...
+</div>
+
+
+<div id="profileContent" style="display:none;">
+
+
+<div class="profile-row">
+
+<strong>Full Name:</strong>
+
+<span id="fullName">
+-
+</span>
+
+</div>
+
+
+<div class="profile-row">
+
+<strong>Email:</strong>
+
+<span id="email">
+-
+</span>
+
+</div>
+
+
+<div class="profile-row">
+
+<strong>Phone:</strong>
+
+<span id="phone">
+-
+</span>
+
+</div>
+
+
+<div class="profile-row">
+
+<strong>Course:</strong>
+
+<span id="course">
+-
+</span>
+
+</div>
+
+
+</div>
+
+
+<div
+    id="profileError"
+    class="error"
+    style="display:none;"
+></div>
+
+
+</div>
+
+
+<!-- DASHBOARD -->
 
 <div class="dashboard-grid">
-
-
-<div class="card">
-
-<h3>👤 My Profile</h3>
-
-<p>
-View and manage your personal information.
-</p>
-
-<button>
-My Profile
-</button>
-
-</div>
-
 
 
 <div class="card">
@@ -222,7 +278,7 @@ My Profile
 <h3>📚 My Courses</h3>
 
 <p>
-View the courses available for your learning.
+View your courses.
 </p>
 
 <button>
@@ -232,13 +288,12 @@ My Courses
 </div>
 
 
-
 <div class="card">
 
 <h3>📖 Lessons</h3>
 
 <p>
-Access your lessons and learning topics.
+Access your lessons.
 </p>
 
 <button>
@@ -248,13 +303,12 @@ Lessons
 </div>
 
 
-
 <div class="card">
 
 <h3>📄 Materials</h3>
 
 <p>
-Access notes, PDFs and other learning materials.
+Access notes and PDFs.
 </p>
 
 <button>
@@ -264,21 +318,19 @@ Materials
 </div>
 
 
-
 <div class="card">
 
 <h3>📝 Tests</h3>
 
 <p>
-Take tests and complete assignments.
+Take tests and assignments.
 </p>
 
 <button>
-Tests & Assignments
+Tests
 </button>
 
 </div>
-
 
 
 <div class="card">
@@ -296,48 +348,20 @@ My Progress
 </div>
 
 
-
 <div class="card">
 
 <h3>🏆 Certificate</h3>
 
 <p>
-View your certificates after completing courses.
+View your certificates.
 </p>
 
 <button>
-My Certificate
+Certificate
 </button>
 
 </div>
 
-
-
-</div>
-
-
-
-<!-- PROFILE SECTION -->
-
-<div class="profile">
-
-<h2>
-Student Information
-</h2>
-
-<p>
-<strong>Email:</strong>
-<span id="studentEmail">
-Loading...
-</span>
-</p>
-
-<p>
-<strong>Account Status:</strong>
-<span id="accountStatus">
-Checking...
-</span>
-</p>
 
 </div>
 
@@ -356,17 +380,15 @@ Checking...
 <script>
 
 
-/* CHECK LOGGED-IN USER */
-
-async function checkUser(){
+async function loadStudentProfile(){
 
     const {
-        data,
-        error
+        data: userData,
+        error: userError
     } = await supabaseClient.auth.getUser();
 
 
-    if(error || !data.user){
+    if(userError || !userData.user){
 
         window.location.href = "login.html";
 
@@ -375,21 +397,65 @@ async function checkUser(){
     }
 
 
-    const user = data.user;
+    const user = userData.user;
 
 
-    document.getElementById("studentEmail").innerText =
+    document.getElementById("email").innerText =
         user.email;
 
 
-    document.getElementById("accountStatus").innerText =
-        "Active";
+    const {
+        data: profile,
+        error: profileError
+    } = await supabaseClient
+        .from("profiles")
+        .select("full_name, phone, course")
+        .eq("id", user.id)
+        .maybeSingle();
+
+
+    if(profileError){
+
+        document.getElementById("profileLoading").style.display =
+            "none";
+
+        document.getElementById("profileError").style.display =
+            "block";
+
+        document.getElementById("profileError").innerText =
+            "Unable to load profile: " + profileError.message;
+
+        return;
+
+    }
+
+
+    if(profile){
+
+        document.getElementById("fullName").innerText =
+            profile.full_name || "-";
+
+        document.getElementById("phone").innerText =
+            profile.phone || "-";
+
+        document.getElementById("course").innerText =
+            profile.course || "-";
+
+        document.getElementById("welcomeName").innerText =
+            profile.full_name || "Student";
+
+    }
+
+
+    document.getElementById("profileLoading").style.display =
+        "none";
+
+    document.getElementById("profileContent").style.display =
+        "block";
 
 }
 
 
-
-/* LOGOUT */
 
 document.getElementById("logoutBtn")
 .addEventListener("click", async function(){
@@ -413,9 +479,7 @@ document.getElementById("logoutBtn")
 });
 
 
-
-checkUser();
-
+loadStudentProfile();
 
 </script>
 
