@@ -1,206 +1,1040 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-    <title>My Courses - CHAND COMPUTER COURSE</title>
+<meta charset="UTF-8">
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>My Courses - CHAND INSTITUTE OF TECHNOLOGY</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #222;
-        }
+<!-- SUPABASE -->
 
-        header {
-            background: #123c69;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
 
-        header h1 {
-            margin-bottom: 8px;
-        }
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 30px auto;
-        }
+<style>
 
-        .back {
-            display: inline-block;
-            margin-bottom: 25px;
-            text-decoration: none;
-            color: #123c69;
-            font-weight: bold;
-        }
+/* =========================
+   GENERAL
+========================= */
 
-        .courses {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .course-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: 0.3s;
-        }
+body{
 
-        .course-card:hover {
-            transform: translateY(-5px);
-        }
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
-        .course-card h2 {
-            color: #123c69;
-            margin-bottom: 12px;
-        }
+    background:#f4f8fc;
 
-        .course-card p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
+    color:#1f2937;
 
-        .btn {
-            display: inline-block;
-            background: #123c69;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 6px;
-            text-decoration: none;
-        }
+}
 
-        .btn:hover {
-            background: #0d2c4d;
-        }
 
-        #message {
-            text-align: center;
-            margin: 30px;
-            font-size: 18px;
-        }
+/* =========================
+   HEADER
+========================= */
 
-        footer {
-            margin-top: 50px;
-            background: #123c69;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+header{
+
+    background:
+    linear-gradient(
+        135deg,
+        #082f49,
+        #0e7490,
+        #06b6d4
+    );
+
+    color:white;
+
+    padding:25px 20px;
+
+}
+
+
+.header-inner{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+
+.header-title h1{
+
+    font-size:24px;
+
+    margin-bottom:6px;
+
+}
+
+
+.header-title p{
+
+    color:#e0f2fe;
+
+    font-size:14px;
+
+}
+
+
+.student-area{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+.student-name{
+
+    font-weight:bold;
+
+}
+
+
+.student-initial{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#06b6d4;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:bold;
+
+    overflow:hidden;
+
+}
+
+
+.student-initial img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:30px auto;
+
+}
+
+
+/* =========================
+   TOP NAVIGATION
+========================= */
+
+.navigation{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+    gap:15px;
+
+}
+
+
+.back{
+
+    text-decoration:none;
+
+    color:#0e7490;
+
+    font-weight:bold;
+
+}
+
+
+.back:hover{
+
+    color:#082f49;
+
+}
+
+
+.logout-btn{
+
+    border:none;
+
+    background:#dc2626;
+
+    color:white;
+
+    padding:9px 15px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}
+
+
+.logout-btn:hover{
+
+    background:#b91c1c;
+
+}
+
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.page-title{
+
+    margin-bottom:20px;
+
+}
+
+
+.page-title h2{
+
+    color:#082f49;
+
+    font-size:24px;
+
+    margin-bottom:6px;
+
+}
+
+
+.page-title p{
+
+    color:#64748b;
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message{
+
+    text-align:center;
+
+    margin:40px 0;
+
+    font-size:16px;
+
+    color:#64748b;
+
+}
+
+
+/* =========================
+   COURSES
+========================= */
+
+.courses{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(270px,1fr)
+    );
+
+    gap:20px;
+
+}
+
+
+/* =========================
+   COURSE CARD
+========================= */
+
+.course-card{
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    box-shadow:
+    0 4px 15px
+    rgba(0,0,0,0.06);
+
+    border:1px solid #e5e7eb;
+
+    transition:
+    0.3s;
+
+}
+
+
+.course-card:hover{
+
+    transform:
+    translateY(-5px);
+
+    box-shadow:
+    0 8px 22px
+    rgba(0,0,0,0.10);
+
+}
+
+
+/* COURSE ICON */
+
+.course-icon{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:13px;
+
+    background:#e0f2fe;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:27px;
+
+    margin-bottom:18px;
+
+}
+
+
+/* COURSE TITLE */
+
+.course-card h3{
+
+    color:#082f49;
+
+    font-size:19px;
+
+    margin-bottom:10px;
+
+}
+
+
+/* COURSE DESCRIPTION */
+
+.course-card p{
+
+    color:#64748b;
+
+    line-height:1.6;
+
+    font-size:14px;
+
+    min-height:65px;
+
+    margin-bottom:20px;
+
+}
+
+
+/* COURSE BUTTON */
+
+.course-btn{
+
+    display:inline-block;
+
+    background:#0e7490;
+
+    color:white;
+
+    padding:11px 17px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+
+.course-btn:hover{
+
+    background:#155e75;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    margin-top:60px;
+
+    background:#082f49;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    font-size:13px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .header-inner{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+
+    .student-area{
+
+        justify-content:center;
+
+    }
+
+
+    .navigation{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+    .back{
+
+        text-align:center;
+
+    }
+
+
+    .logout-btn{
+
+        width:100%;
+
+    }
+
+
+    .page-title h2{
+
+        font-size:21px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
-    <h1>CHAND COMPUTER COURSE</h1>
-    <p>My Courses</p>
+
+    <div class="header-inner">
+
+
+        <div class="header-title">
+
+            <h1>
+                CHAND INSTITUTE OF TECHNOLOGY
+            </h1>
+
+            <p>
+                Student Learning Platform
+            </p>
+
+        </div>
+
+
+        <div class="student-area">
+
+
+            <span
+                class="student-name"
+                id="studentName"
+            >
+                Student
+            </span>
+
+
+            <div
+                class="student-initial"
+                id="studentInitial"
+            >
+                S
+            </div>
+
+        </div>
+
+
+    </div>
+
 </header>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <div class="container">
 
-    <a href="dashboard.html" class="back">
-        ← Back to Dashboard
-    </a>
 
-    <h2 style="margin-bottom: 20px;">📚 Available Courses</h2>
+    <!-- NAVIGATION -->
 
-    <div id="message">
-        Loading courses...
+    <div class="navigation">
+
+
+        <a
+            href="dashboard.html"
+            class="back"
+        >
+
+            ← Back to Dashboard
+
+        </a>
+
+
+        <button
+            class="logout-btn"
+            id="logoutBtn"
+        >
+
+            🚪 Logout
+
+        </button>
+
+
     </div>
 
-    <div id="coursesContainer" class="courses"></div>
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <h2>
+            📚 My Courses
+        </h2>
+
+        <p>
+            Select a course below to start learning.
+        </p>
+
+    </div>
+
+
+
+    <!-- MESSAGE -->
+
+    <div id="message">
+
+        Loading courses...
+
+    </div>
+
+
+
+    <!-- COURSES -->
+
+    <div
+        id="coursesContainer"
+        class="courses"
+    ></div>
+
 
 </div>
 
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
-    <p>© 2026 CHAND COMPUTER COURSE</p>
+
+    <p>
+        © 2026 CHAND INSTITUTE OF TECHNOLOGY
+    </p>
+
 </footer>
 
 
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
 <script src="js/supabase.js"></script>
+
+
 
 <script>
 
-async function loadCourses() {
+/* =========================
+   LOAD STUDENT
+========================= */
 
-    const message = document.getElementById("message");
-    const coursesContainer = document.getElementById("coursesContainer");
+async function loadStudent(){
 
-    // Check if student is logged in
-    const { data: { user }, error: userError } =
-        await supabaseClient.auth.getUser();
-
-    if (userError || !user) {
-        window.location.href = "login.html";
-        return;
-    }
-
-    // Get courses from Supabase
-    const { data: courses, error } =
+    const {
+        data: userData,
+        error: userError
+    } =
         await supabaseClient
-        .from("courses")
-        .select("id, title, description")
-        .order("id", { ascending: true });
+        .auth
+        .getUser();
 
-    if (error) {
-        console.error(error);
-        message.textContent = "Failed to load courses.";
-        return;
+
+    /* =========================
+       CHECK LOGIN
+    ========================= */
+
+    if(
+        userError ||
+        !userData ||
+        !userData.user
+    ){
+
+        window.location.href =
+            "login.html";
+
+        return null;
+
     }
 
-    message.style.display = "none";
 
-    if (!courses || courses.length === 0) {
-        message.style.display = "block";
-        message.textContent = "No courses available yet.";
-        return;
+    const user =
+        userData.user;
+
+
+    /* =========================
+       USER METADATA
+    ========================= */
+
+    const metadata =
+        user.user_metadata || {};
+
+
+    /* =========================
+       GET PROFILE
+    ========================= */
+
+    const {
+        data: profile
+    } =
+        await supabaseClient
+        .from("profiles")
+        .select(
+            "full_name, profile_image_path"
+        )
+        .eq(
+            "id",
+            user.id
+        )
+        .maybeSingle();
+
+
+    const fullName =
+        profile?.full_name ||
+        metadata.full_name ||
+        "Student";
+
+
+    /* =========================
+       SHOW NAME
+    ========================= */
+
+    document.getElementById(
+        "studentName"
+    ).innerText =
+        fullName;
+
+
+    const initial =
+        fullName
+        .charAt(0)
+        .toUpperCase();
+
+
+    document.getElementById(
+        "studentInitial"
+    ).innerText =
+        initial;
+
+
+    /* =========================
+       PROFILE IMAGE
+    ========================= */
+
+    if(
+        profile &&
+        profile.profile_image_path
+    ){
+
+        const {
+            data: imageData,
+            error: imageError
+        } =
+            await supabaseClient.storage
+            .from("profile-images")
+            .createSignedUrl(
+                profile.profile_image_path,
+                60 * 60 * 24
+            );
+
+
+        if(
+            !imageError &&
+            imageData &&
+            imageData.signedUrl
+        ){
+
+            document.getElementById(
+                "studentInitial"
+            ).innerHTML =
+                `
+                <img
+                    src="${imageData.signedUrl}"
+                    alt="Profile"
+                >
+                `;
+
+        }
+
     }
 
-    coursesContainer.innerHTML = "";
 
-    courses.forEach(course => {
-
-        const card = document.createElement("div");
-
-        card.className = "course-card";
-
-        card.innerHTML = `
-            <h2>📘 ${course.title}</h2>
-
-            <p>
-                ${course.description || "No description available."}
-            </p>
-
-            <a href="lessons.html?course_id=${course.id}" class="btn">
-                View Course
-            </a>
-        `;
-
-        coursesContainer.appendChild(card);
-
-    });
+    return user;
 
 }
+
+
+/* =========================
+   LOAD COURSES
+========================= */
+
+async function loadCourses(){
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    const coursesContainer =
+        document.getElementById(
+            "coursesContainer"
+        );
+
+
+    /* =========================
+       CHECK USER
+    ========================= */
+
+    const user =
+        await loadStudent();
+
+
+    if(!user){
+
+        return;
+
+    }
+
+
+    /* =========================
+       GET COURSES
+    ========================= */
+
+    const {
+        data: courses,
+        error
+    } =
+        await supabaseClient
+        .from("courses")
+        .select(
+            "id, title, description"
+        )
+        .order(
+            "id",
+            {
+                ascending:true
+            }
+        );
+
+
+    /* =========================
+       ERROR
+    ========================= */
+
+    if(error){
+
+        console.error(
+            "Courses error:",
+            error
+        );
+
+
+        message.innerText =
+            "Failed to load courses.";
+
+
+        return;
+
+    }
+
+
+    /* =========================
+       NO COURSES
+    ========================= */
+
+    if(
+        !courses ||
+        courses.length === 0
+    ){
+
+        message.innerText =
+            "No courses available yet.";
+
+        return;
+
+    }
+
+
+    /* =========================
+       HIDE MESSAGE
+    ========================= */
+
+    message.style.display =
+        "none";
+
+
+    coursesContainer.innerHTML =
+        "";
+
+
+    /* =========================
+       DISPLAY COURSES
+    ========================= */
+
+    courses.forEach(
+        function(course){
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "course-card";
+
+
+            card.innerHTML =
+                `
+
+                <div class="course-icon">
+                    📘
+                </div>
+
+
+                <h3>
+                    ${escapeHTML(course.title)}
+                </h3>
+
+
+                <p>
+                    ${
+                        escapeHTML(
+                            course.description ||
+                            "No description available."
+                        )
+                    }
+                </p>
+
+
+                <a
+                    href="lessons.html?course_id=${course.id}"
+                    class="course-btn"
+                >
+
+                    📖 Open Course
+
+                </a>
+
+                `;
+
+
+            coursesContainer.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById(
+    "logoutBtn"
+)
+.addEventListener(
+    "click",
+    async function(){
+
+        const {
+            error
+        } =
+            await supabaseClient
+            .auth
+            .signOut();
+
+
+        if(error){
+
+            alert(
+                "Logout failed: " +
+                error.message
+            );
+
+            return;
+
+        }
+
+
+        window.location.href =
+            "login.html";
+
+    }
+);
+
+
+/* =========================
+   START
+========================= */
 
 loadCourses();
 
 </script>
 
+
 </body>
+
 </html>
