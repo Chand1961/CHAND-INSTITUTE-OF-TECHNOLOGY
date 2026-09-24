@@ -8,9 +8,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Student Dashboard - CHAND COMPUTER COURSE</title>
+<title>Student Dashboard - CHAND INSTITUTE OF TECHNOLOGY</title>
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
 
 *{
     margin:0;
@@ -19,146 +23,420 @@
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#f4f7fb;
-    color:#333;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f8fc;
+    color:#1f2937;
 }
 
-header{
-    background:#123c69;
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#082f49;
     color:white;
-    padding:20px;
+    padding:25px 18px;
+    z-index:1000;
+}
+
+.logo{
+    text-align:center;
+    padding-bottom:25px;
+    border-bottom:1px solid rgba(255,255,255,0.15);
+}
+
+.logo-icon{
+    width:55px;
+    height:55px;
+    margin:auto;
+    border-radius:50%;
+    background:#06b6d4;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-}
-
-header h1{
-    font-size:24px;
-}
-
-.logout-btn{
-    background:#d9534f;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:6px;
-    cursor:pointer;
+    justify-content:center;
+    font-size:25px;
     font-weight:bold;
 }
 
-.container{
-    max-width:1100px;
-    margin:30px auto;
-    padding:20px;
+.logo h2{
+    margin-top:12px;
+    font-size:17px;
 }
+
+.logo p{
+    font-size:11px;
+    color:#bae6fd;
+    margin-top:5px;
+}
+
+.menu{
+    margin-top:30px;
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    color:#dbeafe;
+    text-decoration:none;
+    padding:13px 14px;
+    border-radius:9px;
+    margin-bottom:8px;
+    transition:0.3s;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:#0e7490;
+    color:white;
+}
+
+.menu-icon{
+    width:25px;
+    font-size:18px;
+}
+
+.logout{
+    position:absolute;
+    bottom:25px;
+    left:18px;
+    right:18px;
+}
+
+.logout button{
+    width:100%;
+    border:none;
+    padding:13px;
+    border-radius:9px;
+    background:#dc2626;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.logout button:hover{
+    background:#b91c1c;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    background:white;
+    padding:18px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.topbar h1{
+    font-size:22px;
+    color:#082f49;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.student-mini{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#06b6d4;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:30px;
+}
+
+/* =========================
+   WELCOME
+========================= */
 
 .welcome{
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.08);
+    background:linear-gradient(135deg,#082f49,#0e7490,#06b6d4);
+    color:white;
+    border-radius:18px;
+    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     margin-bottom:25px;
+    overflow:hidden;
 }
 
-.welcome h2{
-    color:#123c69;
+.welcome-text h2{
+    font-size:28px;
     margin-bottom:10px;
 }
 
-.profile{
+.welcome-text p{
+    color:#e0f2fe;
+    line-height:1.6;
+}
+
+.welcome-badge{
+    font-size:70px;
+    opacity:0.25;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-card{
     background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.08);
+    border-radius:16px;
+    padding:22px;
     margin-bottom:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.06);
 }
 
-.profile h2{
-    color:#123c69;
-    margin-bottom:20px;
+.profile-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
 }
 
-.profile-row{
-    padding:12px 0;
-    border-bottom:1px solid #eee;
+.profile-header h3{
+    color:#082f49;
 }
 
-.profile-row:last-child{
-    border-bottom:none;
+.profile-info{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
-.profile-row strong{
-    display:inline-block;
-    width:130px;
-    color:#555;
+.info{
+    background:#f0f9ff;
+    padding:15px;
+    border-radius:10px;
 }
 
-.dashboard-grid{
+.info small{
+    display:block;
+    color:#64748b;
+    margin-bottom:6px;
+}
+
+.info strong{
+    color:#082f49;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.section-title{
+    color:#082f49;
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+.cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:20px;
+    gap:18px;
 }
 
 .card{
     background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.08);
-    text-align:center;
+    border-radius:16px;
+    padding:23px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.06);
+    transition:0.3s;
+    border:1px solid #e5e7eb;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 22px rgba(0,0,0,0.10);
+}
+
+.card-icon{
+    width:50px;
+    height:50px;
+    border-radius:12px;
+    background:#e0f2fe;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    margin-bottom:15px;
 }
 
 .card h3{
-    color:#123c69;
-    margin-bottom:12px;
+    color:#082f49;
+    margin-bottom:8px;
 }
 
 .card p{
-    color:#666;
-    margin-bottom:18px;
+    color:#64748b;
+    line-height:1.5;
+    font-size:14px;
+    margin-bottom:17px;
 }
 
-.card button{
-    background:#123c69;
+.btn{
+    display:inline-block;
+    padding:10px 16px;
+    background:#0e7490;
     color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:6px;
-    cursor:pointer;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:13px;
 }
 
-.card button:hover{
-    background:#0d2c4d;
+.btn:hover{
+    background:#155e75;
 }
 
-.loading{
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-card{
+    margin-top:25px;
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.06);
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:#e2e8f0;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#06b6d4,#0e7490);
+    border-radius:20px;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+#loading{
     text-align:center;
-    padding:20px;
+    padding:30px;
+    color:#64748b;
 }
 
-.error{
-    background:#ffe5e5;
-    color:#b00020;
-    padding:15px;
-    border-radius:7px;
-    margin-top:15px;
-}
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width:768px){
+@media(max-width:900px){
 
-    header{
-        flex-direction:column;
-        gap:15px;
-        text-align:center;
+    .sidebar{
+        width:210px;
     }
 
-    .dashboard-grid{
+    .main{
+        margin-left:210px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .profile-info{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:650px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .menu{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:5px;
+    }
+
+    .logout{
+        position:static;
+        margin-top:15px;
+    }
+
+    .topbar{
+        padding:15px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .welcome{
+        padding:22px;
+    }
+
+    .welcome-text h2{
+        font-size:22px;
+    }
+
+    .welcome-badge{
+        display:none;
+    }
+
+    .cards{
         grid-template-columns:1fr;
     }
 
-    .profile-row strong{
-        display:block;
-        margin-bottom:5px;
+    .profile-info{
+        grid-template-columns:1fr;
     }
 
 }
@@ -171,223 +449,436 @@ header h1{
 <body>
 
 
-<header>
+<!-- =========================
+     SIDEBAR
+========================= -->
 
-<h1>CHAND COMPUTER COURSE</h1>
+<aside class="sidebar">
 
-<button
-    class="logout-btn"
-    id="logoutBtn"
->
-LOGOUT
-</button>
+    <div class="logo">
 
-</header>
+        <div class="logo-icon">
+            C
+        </div>
 
+        <h2>CHAND INSTITUTE</h2>
 
-<div class="container">
+        <p>OF TECHNOLOGY</p>
 
+    </div>
 
-<div class="welcome">
 
-<h2>
-Welcome, <span id="welcomeName">Student</span> 👋
-</h2>
+    <nav class="menu">
 
-<p>
-Welcome to your student dashboard.
-</p>
+        <a href="dashboard.html" class="active">
+            <span class="menu-icon">🏠</span>
+            Dashboard
+        </a>
 
-</div>
+        <a href="my-course.html">
+            <span class="menu-icon">📚</span>
+            My Courses
+        </a>
 
+        <a href="my-course.html">
+            <span class="menu-icon">📖</span>
+            Lessons
+        </a>
 
-<!-- STUDENT PROFILE -->
+        <a href="#">
+            <span class="menu-icon">📄</span>
+            Materials
+        </a>
 
-<div class="profile">
+        <a href="#">
+            <span class="menu-icon">🎥</span>
+            Videos
+        </a>
 
-<h2>👤 My Profile</h2>
+        <a href="#">
+            <span class="menu-icon">📝</span>
+            Tests
+        </a>
 
+        <a href="#">
+            <span class="menu-icon">📊</span>
+            My Progress
+        </a>
 
-<div id="profileLoading" class="loading">
-Loading your information...
-</div>
+        <a href="#">
+            <span class="menu-icon">🏆</span>
+            Certificate
+        </a>
 
+    </nav>
 
-<div id="profileContent" style="display:none;">
 
+    <div class="logout">
 
-<div class="profile-row">
+        <button id="logoutBtn">
+            🚪 Logout
+        </button>
 
-<strong>Full Name:</strong>
+    </div>
 
-<span id="fullName">
--
-</span>
+</aside>
 
-</div>
 
+<!-- =========================
+     MAIN
+========================= -->
 
-<div class="profile-row">
+<main class="main">
 
-<strong>Email:</strong>
 
-<span id="email">
--
-</span>
+    <!-- TOP BAR -->
 
-</div>
+    <div class="topbar">
 
+        <h1>Student Dashboard</h1>
 
-<div class="profile-row">
+        <div class="topbar-right">
 
-<strong>Phone:</strong>
+            <span id="topName">
+                Student
+            </span>
 
-<span id="phone">
--
-</span>
+            <div class="student-mini" id="studentInitial">
+                S
+            </div>
 
-</div>
+        </div>
 
+    </div>
 
-<div class="profile-row">
 
-<strong>Course:</strong>
+    <div class="content">
 
-<span id="course">
--
-</span>
 
-</div>
+        <!-- WELCOME -->
 
+        <section class="welcome">
 
-</div>
+            <div class="welcome-text">
 
+                <h2>
+                    Welcome, <span id="welcomeName">
+                    Student
+                    </span>! 👋
+                </h2>
 
-<div
-    id="profileError"
-    class="error"
-    style="display:none;"
-></div>
+                <p>
+                    Welcome to your learning dashboard.
+                    Continue your studies and keep building
+                    your skills with CHAND INSTITUTE OF TECHNOLOGY.
+                </p>
 
+            </div>
 
-</div>
 
+            <div class="welcome-badge">
+                🎓
+            </div>
 
-<!-- DASHBOARD -->
+        </section>
 
-<div class="dashboard-grid">
 
+        <!-- PROFILE -->
 
-<!-- MY COURSES -->
+        <section class="profile-card">
 
-<div class="card">
+            <div class="profile-header">
 
-<h3>📚 My Courses</h3>
+                <h3>
+                    👤 My Profile
+                </h3>
 
-<p>
-View your courses.
-</p>
+            </div>
 
-<button onclick="window.location.href='my-course.html'">
-My Courses
-</button>
 
-</div>
+            <div id="loading">
+                Loading your information...
+            </div>
 
 
-<!-- LESSONS -->
+            <div
+                class="profile-info"
+                id="profileInfo"
+                style="display:none;"
+            >
 
-<div class="card">
+                <div class="info">
 
-<h3>📖 Lessons</h3>
+                    <small>
+                        Full Name
+                    </small>
 
-<p>
-Access your lessons.
-</p>
+                    <strong id="fullName">
+                        -
+                    </strong>
 
-<button>
-Lessons
-</button>
+                </div>
 
-</div>
 
+                <div class="info">
 
-<!-- MATERIALS -->
+                    <small>
+                        Email
+                    </small>
 
-<div class="card">
+                    <strong id="email">
+                        -
+                    </strong>
 
-<h3>📄 Materials</h3>
+                </div>
 
-<p>
-Access notes and PDFs.
-</p>
 
-<button>
-Materials
-</button>
+                <div class="info">
 
-</div>
+                    <small>
+                        Phone
+                    </small>
 
+                    <strong id="phone">
+                        -
+                    </strong>
 
-<!-- TESTS -->
+                </div>
 
-<div class="card">
 
-<h3>📝 Tests</h3>
+                <div class="info">
 
-<p>
-Take tests and assignments.
-</p>
+                    <small>
+                        Course
+                    </small>
 
-<button>
-Tests
-</button>
+                    <strong id="course">
+                        -
+                    </strong>
 
-</div>
+                </div>
 
+            </div>
 
-<!-- PROGRESS -->
+        </section>
 
-<div class="card">
 
-<h3>📊 Progress</h3>
+        <!-- LEARNING -->
 
-<p>
-Track your learning progress.
-</p>
+        <h2 class="section-title">
+            🎓 My Learning
+        </h2>
 
-<button>
-My Progress
-</button>
 
-</div>
+        <div class="cards">
 
 
-<!-- CERTIFICATE -->
+            <!-- COURSES -->
 
-<div class="card">
+            <div class="card">
 
-<h3>🏆 Certificate</h3>
+                <div class="card-icon">
+                    📚
+                </div>
 
-<p>
-View your certificates.
-</p>
+                <h3>
+                    My Courses
+                </h3>
 
-<button>
-Certificate
-</button>
+                <p>
+                    View the courses you are currently
+                    enrolled in.
+                </p>
 
-</div>
+                <a
+                    href="my-course.html"
+                    class="btn"
+                >
+                    View Courses
+                </a>
 
+            </div>
 
-</div>
 
+            <!-- LESSONS -->
 
-</div>
+            <div class="card">
 
+                <div class="card-icon">
+                    📖
+                </div>
 
+                <h3>
+                    Lessons
+                </h3>
 
-<!-- SUPABASE -->
+                <p>
+                    Continue learning through your
+                    available lessons.
+                </p>
+
+                <a
+                    href="my-course.html"
+                    class="btn"
+                >
+                    Open Lessons
+                </a>
+
+            </div>
+
+
+            <!-- MATERIALS -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Notes & Materials
+                </h3>
+
+                <p>
+                    Access notes, PDFs and other
+                    learning materials.
+                </p>
+
+                <a
+                    href="#"
+                    class="btn"
+                >
+                    View Materials
+                </a>
+
+            </div>
+
+
+            <!-- VIDEOS -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🎥
+                </div>
+
+                <h3>
+                    Learning Videos
+                </h3>
+
+                <p>
+                    Watch educational videos uploaded
+                    for your course.
+                </p>
+
+                <a
+                    href="#"
+                    class="btn"
+                >
+                    Watch Videos
+                </a>
+
+            </div>
+
+
+            <!-- TESTS -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Tests & Assignments
+                </h3>
+
+                <p>
+                    Complete tests and assignments
+                    from your course.
+                </p>
+
+                <a
+                    href="#"
+                    class="btn"
+                >
+                    View Tests
+                </a>
+
+            </div>
+
+
+            <!-- CERTIFICATE -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🏆
+                </div>
+
+                <h3>
+                    Certificate
+                </h3>
+
+                <p>
+                    View your course completion
+                    certificate.
+                </p>
+
+                <a
+                    href="#"
+                    class="btn"
+                >
+                    My Certificate
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <section class="progress-card">
+
+            <div class="progress-top">
+
+                <h3>
+                    📊 Learning Progress
+                </h3>
+
+                <strong>
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"></div>
+
+            </div>
+
+
+            <p style="margin-top:12px;color:#64748b;">
+
+                Complete lessons and tests to increase
+                your learning progress.
+
+            </p>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -396,107 +887,173 @@ Certificate
 
 <script>
 
+async function loadDashboard(){
 
-async function loadStudentProfile(){
+    const loading =
+        document.getElementById("loading");
+
+    const profileInfo =
+        document.getElementById("profileInfo");
+
+
+    /* CHECK USER */
 
     const {
         data: userData,
         error: userError
-    } = await supabaseClient.auth.getUser();
+    } =
+        await supabaseClient.auth.getUser();
 
 
     if(userError || !userData.user){
 
-        window.location.href = "login.html";
+        window.location.href =
+            "login.html";
 
         return;
 
     }
 
 
-    const user = userData.user;
+    const user =
+        userData.user;
 
 
-    document.getElementById("email").innerText =
-        user.email;
+    /* USER METADATA */
 
+    const metadata =
+        user.user_metadata || {};
+
+
+    /* GET PROFILE */
 
     const {
         data: profile,
-        error: profileError
-    } = await supabaseClient
+        error
+    } =
+        await supabaseClient
         .from("profiles")
-        .select("full_name, phone, course")
+        .select(
+            "full_name, phone, course"
+        )
         .eq("id", user.id)
         .maybeSingle();
 
 
-    if(profileError){
+    if(error){
 
-        document.getElementById("profileLoading").style.display =
-            "none";
-
-        document.getElementById("profileError").style.display =
-            "block";
-
-        document.getElementById("profileError").innerText =
-            "Unable to load profile: " + profileError.message;
-
-        return;
+        console.error(error);
 
     }
 
 
-    if(profile){
-
-        document.getElementById("fullName").innerText =
-            profile.full_name || "-";
-
-        document.getElementById("phone").innerText =
-            profile.phone || "-";
-
-        document.getElementById("course").innerText =
-            profile.course || "-";
-
-        document.getElementById("welcomeName").innerText =
-            profile.full_name || "Student";
-
-    }
+    const fullName =
+        profile?.full_name ||
+        metadata.full_name ||
+        "Student";
 
 
-    document.getElementById("profileLoading").style.display =
+    const phone =
+        profile?.phone ||
+        metadata.phone ||
+        "-";
+
+
+    const course =
+        profile?.course ||
+        metadata.course ||
+        "-";
+
+
+    /* DISPLAY */
+
+    document.getElementById("fullName")
+        .innerText =
+        fullName;
+
+
+    document.getElementById("email")
+        .innerText =
+        user.email || "-";
+
+
+    document.getElementById("phone")
+        .innerText =
+        phone;
+
+
+    document.getElementById("course")
+        .innerText =
+        course;
+
+
+    document.getElementById("welcomeName")
+        .innerText =
+        fullName;
+
+
+    document.getElementById("topName")
+        .innerText =
+        fullName;
+
+
+    /* INITIAL */
+
+    document.getElementById("studentInitial")
+        .innerText =
+        fullName
+        .charAt(0)
+        .toUpperCase();
+
+
+    loading.style.display =
         "none";
 
-    document.getElementById("profileContent").style.display =
-        "block";
+
+    profileInfo.style.display =
+        "grid";
 
 }
 
 
+/* =========================
+   LOGOUT
+========================= */
 
-document.getElementById("logoutBtn")
-.addEventListener("click", async function(){
+document
+.getElementById("logoutBtn")
+.addEventListener(
+    "click",
+    async function(){
 
-    const {
-        error
-    } = await supabaseClient.auth.signOut();
+        const {
+            error
+        } =
+        await supabaseClient.auth.signOut();
 
 
-    if(error){
+        if(error){
 
-        alert("Logout error: " + error.message);
+            alert(
+                "Logout failed: " +
+                error.message
+            );
 
-        return;
+            return;
+
+        }
+
+
+        window.location.href =
+            "login.html";
 
     }
+);
 
 
-    window.location.href = "login.html";
+/* START */
 
-});
-
-
-loadStudentProfile();
+loadDashboard();
 
 </script>
 
