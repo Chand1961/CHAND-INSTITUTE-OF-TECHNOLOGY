@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -124,6 +125,10 @@ header h1{
     padding:10px 18px;
     border-radius:6px;
     cursor:pointer;
+}
+
+.card button:hover{
+    background:#0d2c4d;
 }
 
 .loading{
@@ -273,6 +278,8 @@ Loading your information...
 <div class="dashboard-grid">
 
 
+<!-- MY COURSES -->
+
 <div class="card">
 
 <h3>📚 My Courses</h3>
@@ -281,12 +288,14 @@ Loading your information...
 View your courses.
 </p>
 
-<button>
+<button onclick="window.location.href='my-course.html'">
 My Courses
 </button>
 
 </div>
 
+
+<!-- LESSONS -->
 
 <div class="card">
 
@@ -303,6 +312,8 @@ Lessons
 </div>
 
 
+<!-- MATERIALS -->
+
 <div class="card">
 
 <h3>📄 Materials</h3>
@@ -317,6 +328,8 @@ Materials
 
 </div>
 
+
+<!-- TESTS -->
 
 <div class="card">
 
@@ -333,6 +346,8 @@ Tests
 </div>
 
 
+<!-- PROGRESS -->
+
 <div class="card">
 
 <h3>📊 Progress</h3>
@@ -347,6 +362,8 @@ My Progress
 
 </div>
 
+
+<!-- CERTIFICATE -->
 
 <div class="card">
 
@@ -487,3 +504,4 @@ loadStudentProfile();
 </body>
 
 </html>
+```
