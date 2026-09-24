@@ -1,0 +1,714 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard - CHAND INSTITUTE OF TECHNOLOGY</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    background:#123c69;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    margin-bottom:8px;
+}
+
+/* CONTAINER */
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+/* TOP BAR */
+
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.admin-name{
+    font-size:20px;
+    font-weight:bold;
+    color:#123c69;
+}
+
+/* BUTTONS */
+
+.btn{
+    border:none;
+    padding:10px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.btn-primary{
+    background:#123c69;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#0d2c4d;
+}
+
+.btn-danger{
+    background:#b00020;
+    color:white;
+}
+
+.btn-danger:hover{
+    background:#850018;
+}
+
+.btn-secondary{
+    background:#777;
+    color:white;
+}
+
+/* CARDS */
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom:25px;
+}
+
+.card h2{
+    color:#123c69;
+    margin-bottom:15px;
+}
+
+/* FORM */
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:15px;
+}
+
+.form-group textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+/* COURSE */
+
+.course{
+    border:1px solid #ddd;
+    padding:18px;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+
+.course h3{
+    color:#123c69;
+    margin-bottom:7px;
+}
+
+.course p{
+    color:#666;
+    line-height:1.5;
+    margin-bottom:12px;
+}
+
+/* MESSAGE */
+
+#message{
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+    display:none;
+}
+
+.success{
+    background:#e5f8eb;
+    color:#176b32;
+}
+
+.error{
+    background:#ffe5e5;
+    color:#b00020;
+}
+
+.loading{
+    text-align:center;
+    padding:30px;
+    background:white;
+    border-radius:10px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+    .container{
+        width:94%;
+    }
+
+    .top-bar{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>CHAND INSTITUTE OF TECHNOLOGY</h1>
+
+<p>Administrator Dashboard</p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- TOP BAR -->
+
+<div class="top-bar">
+
+    <div class="admin-name">
+        👨‍💼 Admin Dashboard
+    </div>
+
+    <div>
+
+        <button
+            class="btn btn-secondary"
+            onclick="goDashboard()"
+        >
+            Dashboard
+        </button>
+
+        <button
+            class="btn btn-danger"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MESSAGE -->
+
+<div id="message"></div>
+
+
+<!-- ADD COURSE -->
+
+<div class="card">
+
+    <h2>➕ Add New Course</h2>
+
+    <form id="courseForm">
+
+        <div class="form-group">
+
+            <label for="courseTitle">
+                Course Title
+            </label>
+
+            <input
+                type="text"
+                id="courseTitle"
+                placeholder="Example: Computer Basics"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="courseDescription">
+                Course Description
+            </label>
+
+            <textarea
+                id="courseDescription"
+                placeholder="Enter course description..."
+            ></textarea>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+        >
+            Add Course
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- COURSES -->
+
+<div class="card">
+
+    <h2>📚 Existing Courses</h2>
+
+    <div id="coursesContainer">
+
+        <div class="loading">
+            Loading courses...
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+
+<script>
+
+
+/* =========================
+   SHOW MESSAGE
+========================= */
+
+function showMessage(text, type){
+
+    const message =
+        document.getElementById("message");
+
+    message.innerText = text;
+
+    message.className = type;
+
+    message.style.display = "block";
+
+    setTimeout(function(){
+
+        message.style.display = "none";
+
+    }, 4000);
+
+}
+
+
+/* =========================
+   CHECK ADMIN
+========================= */
+
+async function checkAdmin(){
+
+    const {
+        data: userData,
+        error: userError
+    } =
+        await supabaseClient.auth.getUser();
+
+
+    if(userError || !userData.user){
+
+        window.location.href =
+            "login.html";
+
+        return null;
+
+    }
+
+
+    const user =
+        userData.user;
+
+
+    const {
+        data: profile,
+        error: profileError
+    } =
+        await supabaseClient
+        .from("profiles")
+        .select("full_name, role")
+        .eq("id", user.id)
+        .maybeSingle();
+
+
+    if(profileError){
+
+        console.error(profileError);
+
+        document.body.innerHTML = `
+            <div style="
+                padding:40px;
+                text-align:center;
+                font-family:Arial;
+            ">
+                <h2>Unable to verify account.</h2>
+                <p>${profileError.message}</p>
+            </div>
+        `;
+
+        return null;
+
+    }
+
+
+    /* NOT ADMIN */
+
+    if(!profile || profile.role !== "admin"){
+
+        document.body.innerHTML = `
+            <div style="
+                padding:40px;
+                text-align:center;
+                font-family:Arial;
+            ">
+
+                <h2 style="color:#b00020;">
+                    Access Denied
+                </h2>
+
+                <p>
+                    You do not have administrator permission.
+                </p>
+
+                <br>
+
+                <button
+                    onclick="window.location.href='dashboard.html'"
+                    style="
+                        padding:10px 18px;
+                        background:#123c69;
+                        color:white;
+                        border:none;
+                        border-radius:6px;
+                        cursor:pointer;
+                    "
+                >
+                    Back to Dashboard
+                </button>
+
+            </div>
+        `;
+
+        return null;
+
+    }
+
+
+    return user;
+
+}
+
+
+/* =========================
+   LOAD COURSES
+========================= */
+
+async function loadCourses(){
+
+    const container =
+        document.getElementById(
+            "coursesContainer"
+        );
+
+
+    const {
+        data: courses,
+        error
+    } =
+        await supabaseClient
+        .from("courses")
+        .select(
+            "id, title, description"
+        )
+        .order(
+            "id",
+            {
+                ascending:true
+            }
+        );
+
+
+    if(error){
+
+        console.error(error);
+
+        container.innerHTML = `
+            <div class="error">
+                Failed to load courses:
+                ${error.message}
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    if(!courses || courses.length === 0){
+
+        container.innerHTML = `
+            <p>No courses available.</p>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        courses.map(function(course){
+
+            return `
+
+                <div class="course">
+
+                    <h3>
+                        ${escapeHTML(course.title)}
+                    </h3>
+
+                    <p>
+                        ${
+                            escapeHTML(
+                                course.description ||
+                                "No description."
+                            )
+                        }
+                    </p>
+
+                    <small>
+                        Course ID: ${course.id}
+                    </small>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================
+   ADD COURSE
+========================= */
+
+document
+.getElementById("courseForm")
+.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const title =
+            document
+            .getElementById("courseTitle")
+            .value
+            .trim();
+
+
+        const description =
+            document
+            .getElementById("courseDescription")
+            .value
+            .trim();
+
+
+        if(!title){
+
+            showMessage(
+                "Please enter course title.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+            .from("courses")
+            .insert({
+                title:title,
+                description:description
+            });
+
+
+        if(error){
+
+            console.error(error);
+
+            showMessage(
+                "Failed to add course: " +
+                error.message,
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        showMessage(
+            "Course added successfully!",
+            "success"
+        );
+
+
+        document
+        .getElementById("courseForm")
+        .reset();
+
+
+        loadCourses();
+
+    }
+);
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout(){
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+async function startAdmin(){
+
+    const user =
+        await checkAdmin();
+
+
+    if(!user){
+
+        return;
+
+    }
+
+
+    await loadCourses();
+
+}
+
+
+startAdmin();
+
+
+</script>
+
+
+</body>
+
+</html>
+```
