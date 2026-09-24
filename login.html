@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -37,7 +38,6 @@ header h1{
 header a{
     color:white;
     text-decoration:none;
-    font-size:15px;
 }
 
 .container{
@@ -63,9 +63,8 @@ header a{
 label{
     display:block;
     font-weight:bold;
-    margin-bottom:8px;
     margin-top:18px;
-    color:#333;
+    margin-bottom:8px;
 }
 
 input{
@@ -74,11 +73,6 @@ input{
     border:1px solid #ccc;
     border-radius:7px;
     font-size:16px;
-    outline:none;
-}
-
-input:focus{
-    border-color:#123c69;
 }
 
 button{
@@ -94,21 +88,16 @@ button{
     cursor:pointer;
 }
 
-button:hover{
-    background:#0d2e50;
-}
-
 button:disabled{
     background:#777;
-    cursor:not-allowed;
 }
 
 .message{
+    display:none;
     margin-top:18px;
     padding:12px;
-    border-radius:6px;
+    border-radius:7px;
     text-align:center;
-    display:none;
 }
 
 .register-link{
@@ -125,6 +114,7 @@ button:disabled{
 </style>
 
 </head>
+
 
 <body>
 
@@ -212,8 +202,6 @@ Create Account
 
 
 
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="js/supabase.js"></script>
@@ -221,44 +209,47 @@ Create Account
 
 <script>
 
-const loginForm = document.getElementById("loginForm");
 
-const loginButton = document.getElementById("loginButton");
+const loginForm =
+    document.getElementById("loginForm");
 
-const message = document.getElementById("message");
+const loginButton =
+    document.getElementById("loginButton");
 
-
-loginForm.addEventListener("submit", async function(event){
-
-    event.preventDefault();
-
-
-    const email =
-        document.getElementById("email").value.trim();
-
-    const password =
-        document.getElementById("password").value;
+const message =
+    document.getElementById("message");
 
 
-    if(!email || !password){
 
-        showMessage(
-            "Please enter your email and password.",
-            "error"
-        );
+loginForm.addEventListener(
+    "submit",
+    async function(event){
 
-        return;
-    }
+        event.preventDefault();
 
 
-    loginButton.disabled = true;
+        const email =
+            document.getElementById("email").value.trim();
 
-    loginButton.innerText = "LOGGING IN...";
+        const password =
+            document.getElementById("password").value;
 
 
-    try{
+        loginButton.disabled = true;
 
-        const { data, error } =
+        loginButton.innerText =
+            "LOGGING IN...";
+
+
+        try{
+
+
+            /* LOGIN */
+
+            const {
+                data,
+                error
+            } =
             await supabaseClient.auth.signInWithPassword({
 
                 email: email,
@@ -268,63 +259,132 @@ loginForm.addEventListener("submit", async function(event){
             });
 
 
-        if(error){
+            if(error){
+
+                showMessage(
+                    "LOGIN ERROR: " +
+                    error.message,
+                    "error"
+                );
+
+                resetButton();
+
+                return;
+
+            }
+
+
+            const user = data.user;
+
+
+            if(!user){
+
+                showMessage(
+                    "Login failed. Please try again.",
+                    "error"
+                );
+
+                resetButton();
+
+                return;
+
+            }
+
+
+            /*
+             GET STUDENT INFORMATION
+             FROM REGISTRATION METADATA
+            */
+
+            const metadata =
+                user.user_metadata || {};
+
+
+            const fullName =
+                metadata.full_name || "";
+
+            const phone =
+                metadata.phone || "";
+
+            const course =
+                metadata.course || "";
+
+
+
+            /*
+             SAVE INFORMATION
+             INTO PROFILES TABLE
+            */
+
+            const {
+                error: profileError
+            } =
+            await supabaseClient
+                .from("profiles")
+                .upsert({
+
+                    id: user.id,
+
+                    full_name: fullName,
+
+                    phone: phone,
+
+                    course: course
+
+                });
+
+
+            if(profileError){
+
+                console.log(
+                    "Profile error:",
+                    profileError
+                );
+
+            }
+
 
             showMessage(
-                "LOGIN ERROR: " + error.message,
+                "Login successful! Opening dashboard...",
+                "success"
+            );
+
+
+            setTimeout(function(){
+
+                window.location.href =
+                    "dashboard.html";
+
+            },1500);
+
+
+        }
+
+        catch(error){
+
+            showMessage(
+                "Something went wrong: " +
+                error.message,
                 "error"
             );
 
-            loginButton.disabled = false;
+            resetButton();
 
-            loginButton.innerText = "LOGIN";
-
-            return;
         }
-
-
-        if(!data.user){
-
-            showMessage(
-                "Login failed. Please try again.",
-                "error"
-            );
-
-            loginButton.disabled = false;
-
-            loginButton.innerText = "LOGIN";
-
-            return;
-        }
-
-
-        showMessage(
-            "Login successful! Opening your account...",
-            "success"
-        );
-
-
-        setTimeout(function(){
-
-            window.location.href = "dashboard.html";
-
-        },1500);
-
-
-    }catch(error){
-
-        showMessage(
-            "Something went wrong: " + error.message,
-            "error"
-        );
-
-        loginButton.disabled = false;
-
-        loginButton.innerText = "LOGIN";
 
     }
+);
 
-});
+
+
+function resetButton(){
+
+    loginButton.disabled = false;
+
+    loginButton.innerText = "LOGIN";
+
+}
+
 
 
 function showMessage(text,type){
@@ -336,22 +396,27 @@ function showMessage(text,type){
 
     if(type === "error"){
 
-        message.style.background = "#ffe5e5";
+        message.style.background =
+            "#ffe5e5";
 
-        message.style.color = "#b00020";
+        message.style.color =
+            "#b00020";
 
     }
 
 
     if(type === "success"){
 
-        message.style.background = "#e5ffe9";
+        message.style.background =
+            "#e5ffe9";
 
-        message.style.color = "#087f23";
+        message.style.color =
+            "#087f23";
 
     }
 
 }
+
 
 </script>
 
