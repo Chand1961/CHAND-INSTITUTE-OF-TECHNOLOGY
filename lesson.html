@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,12 +58,21 @@ header h1{
 
 .lesson-box h2{
     color:#123c69;
-    margin-bottom:20px;
+    margin-bottom:10px;
+}
+
+.lesson-description{
+    color:#666;
+    line-height:1.6;
+    margin-bottom:25px;
+    padding-bottom:20px;
+    border-bottom:1px solid #ddd;
 }
 
 .lesson-content{
     line-height:1.8;
     color:#444;
+    white-space:pre-line;
 }
 
 .lesson-content h3{
@@ -89,11 +99,19 @@ header h1{
     border-radius:8px;
 }
 
+.lesson-number{
+    color:#777;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -106,8 +124,13 @@ header h1{
 
 <div class="container">
 
-<a href="javascript:history.back()" class="back">
-← Back
+
+<a
+    href="#"
+    id="backButton"
+    class="back"
+>
+← Back to Lessons
 </a>
 
 
@@ -131,54 +154,43 @@ Loading lesson...
     style="display:none;"
 >
 
+
+<div
+    id="lessonNumber"
+    class="lesson-number"
+>
+Lesson
+</div>
+
+
 <h2 id="lessonTitle">
-Lesson 1
+Lesson Title
 </h2>
 
 
-<div class="lesson-content">
-
-<h3>Introduction to the Course</h3>
-
-<p>
-Welcome to CHAND INSTITUTE OF TECHNOLOGY.
-This lesson introduces you to the course and explains
-what you are going to learn.
-</p>
+<div
+    id="lessonDescription"
+    class="lesson-description"
+>
+Lesson description
+</div>
 
 
-<h3>Lesson Content</h3>
+<div
+    id="lessonBody"
+    class="lesson-content"
+>
+Lesson content
+</div>
 
-<p>
-In this lesson, you will learn the basic concepts related
-to your selected course. You will also understand the
-important topics that will be covered throughout the course.
-</p>
-
-
-<h3>What You Will Learn</h3>
-
-<p>
-After completing this lesson, you should understand the
-basic ideas of the course and be ready to continue with
-the next lessons.
-</p>
-
-
-<h3>Conclusion</h3>
-
-<p>
-This is the first step in your learning journey.
-Make sure you understand the lesson before continuing
-to the next topic.
-</p>
 
 </div>
 
-</div>
 
 </div>
 
+
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -187,19 +199,25 @@ to the next topic.
 
 <script>
 
+
 async function loadLesson(){
+
 
     const loading =
         document.getElementById("loading");
 
+
     const errorBox =
         document.getElementById("error");
+
 
     const lessonContent =
         document.getElementById("lessonContent");
 
 
-    /* CHECK LOGIN */
+    /* =========================
+       CHECK LOGIN
+    ========================= */
 
     const {
         data: userData,
@@ -210,14 +228,17 @@ async function loadLesson(){
 
     if(userError || !userData.user){
 
-        window.location.href = "login.html";
+        window.location.href =
+            "login.html";
 
         return;
 
     }
 
 
-    /* GET INFORMATION FROM URL */
+    /* =========================
+       GET URL INFORMATION
+    ========================= */
 
     const params =
         new URLSearchParams(
@@ -233,11 +254,17 @@ async function loadLesson(){
         params.get("lesson_id");
 
 
+    /* =========================
+       CHECK INFORMATION
+    ========================= */
+
     if(!courseId || !lessonId){
 
-        loading.style.display = "none";
+        loading.style.display =
+            "none";
 
-        errorBox.style.display = "block";
+        errorBox.style.display =
+            "block";
 
         errorBox.innerText =
             "Lesson information is missing.";
@@ -247,24 +274,132 @@ async function loadLesson(){
     }
 
 
-    /* SHOW LESSON */
+    /* =========================
+       BACK BUTTON
+    ========================= */
 
-    document.getElementById("lessonTitle")
-        .innerText =
-        "Lesson " + lessonId;
+    document.getElementById("backButton")
+        .href =
+        "lessons.html?course_id=" +
+        encodeURIComponent(courseId);
 
 
-    loading.style.display = "none";
+    /* =========================
+       GET LESSON
+    ========================= */
 
-    lessonContent.style.display = "block";
+    const {
+        data: lesson,
+        error: lessonError
+    } =
+        await supabaseClient
+        .from("lessons")
+        .select(
+            "id, course_id, title, description, content, lesson_number"
+        )
+        .eq("id", lessonId)
+        .eq("course_id", courseId)
+        .maybeSingle();
+
+
+    /* =========================
+       CHECK ERROR
+    ========================= */
+
+    if(lessonError){
+
+        console.error(
+            lessonError
+        );
+
+        loading.style.display =
+            "none";
+
+        errorBox.style.display =
+            "block";
+
+        errorBox.innerText =
+            "Failed to load lesson: " +
+            lessonError.message;
+
+        return;
+
+    }
+
+
+    /* =========================
+       LESSON NOT FOUND
+    ========================= */
+
+    if(!lesson){
+
+        loading.style.display =
+            "none";
+
+        errorBox.style.display =
+            "block";
+
+        errorBox.innerText =
+            "Lesson not found.";
+
+        return;
+
+    }
+
+
+    /* =========================
+       DISPLAY LESSON
+    ========================= */
+
+    document.getElementById(
+        "lessonNumber"
+    ).innerText =
+        "Lesson " +
+        lesson.lesson_number;
+
+
+    document.getElementById(
+        "lessonTitle"
+    ).innerText =
+        lesson.title;
+
+
+    document.getElementById(
+        "lessonDescription"
+    ).innerText =
+        lesson.description ||
+        "No description available.";
+
+
+    document.getElementById(
+        "lessonBody"
+    ).innerText =
+        lesson.content ||
+        "No lesson content available yet.";
+
+
+    /* =========================
+       SHOW PAGE
+    ========================= */
+
+    loading.style.display =
+        "none";
+
+
+    lessonContent.style.display =
+        "block";
+
 
 }
 
 
 loadLesson();
 
+
 </script>
+
 
 </body>
 
 </html>
+```
