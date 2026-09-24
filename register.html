@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Register - CHAND COMPUTER COURSE</title>
+<title>Student Registration - CHAND COMPUTER COURSE</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
 }
 
 body{
+    font-family:Arial,sans-serif;
     background:#f4f7fb;
 }
 
 header{
     background:#123c69;
     color:white;
-    padding:20px;
+    padding:25px;
     text-align:center;
+}
+
+header h1{
+    margin-bottom:10px;
 }
 
 header a{
@@ -31,16 +39,16 @@ header a{
 }
 
 .container{
-    max-width:500px;
-    margin:50px auto;
+    max-width:550px;
+    margin:40px auto;
     padding:20px;
 }
 
-.form-box{
+.register-box{
     background:white;
     padding:30px;
     border-radius:12px;
-    box-shadow:0 3px 15px rgba(0,0,0,.1);
+    box-shadow:0 4px 20px rgba(0,0,0,0.12);
 }
 
 h2{
@@ -51,9 +59,9 @@ h2{
 
 label{
     display:block;
-    margin-top:15px;
-    margin-bottom:7px;
     font-weight:bold;
+    margin-top:16px;
+    margin-bottom:7px;
 }
 
 input,
@@ -61,20 +69,39 @@ select{
     width:100%;
     padding:13px;
     border:1px solid #ccc;
-    border-radius:6px;
+    border-radius:7px;
+    font-size:16px;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#123c69;
 }
 
 button{
     width:100%;
-    margin-top:25px;
     padding:14px;
+    margin-top:25px;
     border:none;
     border-radius:7px;
     background:#123c69;
     color:white;
-    font-size:16px;
+    font-size:17px;
     font-weight:bold;
     cursor:pointer;
+}
+
+button:disabled{
+    background:#777;
+}
+
+.message{
+    display:none;
+    margin-top:18px;
+    padding:12px;
+    border-radius:7px;
+    text-align:center;
 }
 
 .login-link{
@@ -85,26 +112,43 @@ button{
 .login-link a{
     color:#123c69;
     font-weight:bold;
+    text-decoration:none;
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-    <h1>CHAND COMPUTER COURSE</h1>
-    <p><a href="index.html">← Back to Home</a></p>
+
+<h1>CHAND COMPUTER COURSE</h1>
+
+<p>
+<a href="index.html">← Back to Home</a>
+</p>
+
 </header>
+
+
 
 <div class="container">
 
-<div class="form-box">
+<div class="register-box">
 
 <h2>Student Registration</h2>
 
+
 <form id="registerForm">
 
-<label>Full Name</label>
+
+<label for="fullName">
+Full Name
+</label>
+
 <input
     type="text"
     id="fullName"
@@ -112,23 +156,34 @@ button{
     required
 >
 
-<label>Phone Number</label>
+
+<label for="phone">
+Phone Number
+</label>
+
 <input
     type="tel"
     id="phone"
-    placeholder="Enter phone number"
+    placeholder="Enter your phone number"
     required
 >
 
-<label>Email Address</label>
+
+<label for="email">
+Email Address
+</label>
+
 <input
     type="email"
     id="email"
-    placeholder="Enter email address"
+    placeholder="Enter your email"
     required
 >
 
-<label>Select Course</label>
+
+<label for="course">
+Select Course
+</label>
 
 <select id="course" required>
 
@@ -136,16 +191,36 @@ button{
 -- Select Course --
 </option>
 
-<option>Computer Basics</option>
-<option>Microsoft Word</option>
-<option>Microsoft Excel</option>
-<option>Internet & Email</option>
-<option>Web Design</option>
-<option>Database</option>
+<option value="Computer Basics">
+Computer Basics
+</option>
+
+<option value="Microsoft Office">
+Microsoft Office
+</option>
+
+<option value="Web Design">
+Web Design
+</option>
+
+<option value="Web Development">
+Web Development
+</option>
+
+<option value="Graphic Design">
+Graphic Design
+</option>
+
+<option value="Internet & Online Services">
+Internet & Online Services
+</option>
 
 </select>
 
-<label>Password</label>
+
+<label for="password">
+Password
+</label>
 
 <input
     type="password"
@@ -154,7 +229,10 @@ button{
     required
 >
 
-<label>Confirm Password</label>
+
+<label for="confirmPassword">
+Confirm Password
+</label>
 
 <input
     type="password"
@@ -163,63 +241,258 @@ button{
     required
 >
 
-<button type="submit">
+
+<button
+    type="submit"
+    id="registerButton"
+>
 CREATE ACCOUNT
 </button>
 
+
+<div
+    id="message"
+    class="message"
+></div>
+
+
 </form>
 
+
 <div class="login-link">
+
+<p>
 Already have an account?
-<a href="login.html">Login</a>
+</p>
+
+<br>
+
+<a href="login.html">
+Login Here
+</a>
+
 </div>
+
 
 </div>
 
 </div>
+
+
+
+<!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="js/supabase.js"></script>
+
 
 <script>
 
-document.getElementById("registerForm").addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+const registerForm =
+    document.getElementById("registerForm");
 
-    const fullName = document.getElementById("fullName").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const course = document.getElementById("course").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+const registerButton =
+    document.getElementById("registerButton");
 
-    if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
+const message =
+    document.getElementById("message");
+
+
+
+registerForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const fullName =
+            document.getElementById("fullName").value.trim();
+
+        const phone =
+            document.getElementById("phone").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const course =
+            document.getElementById("course").value;
+
+        const password =
+            document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+
+        /* CHECK PASSWORD */
+
+        if(password !== confirmPassword){
+
+            showMessage(
+                "Passwords do not match!",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(password.length < 6){
+
+            showMessage(
+                "Password must be at least 6 characters.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        registerButton.disabled = true;
+
+        registerButton.innerText =
+            "CREATING ACCOUNT...";
+
+
+        try{
+
+
+            /* CREATE SUPABASE ACCOUNT */
+
+            const {
+                data,
+                error
+            } =
+            await supabaseClient.auth.signUp({
+
+                email: email,
+
+                password: password,
+
+                options: {
+
+                    data: {
+
+                        full_name: fullName,
+
+                        phone: phone,
+
+                        course: course
+
+                    }
+
+                }
+
+            });
+
+
+            if(error){
+
+                showMessage(
+                    "REGISTRATION ERROR: " +
+                    error.message,
+                    "error"
+                );
+
+                registerButton.disabled = false;
+
+                registerButton.innerText =
+                    "CREATE ACCOUNT";
+
+                return;
+
+            }
+
+
+            if(!data.user){
+
+                showMessage(
+                    "Registration failed. Please try again.",
+                    "error"
+                );
+
+                registerButton.disabled = false;
+
+                registerButton.innerText =
+                    "CREATE ACCOUNT";
+
+                return;
+
+            }
+
+
+            showMessage(
+                "Registration successful! Please check your email and confirm your account.",
+                "success"
+            );
+
+
+            registerForm.reset();
+
+
+            registerButton.disabled = false;
+
+            registerButton.innerText =
+                "CREATE ACCOUNT";
+
+
+        }
+
+        catch(error){
+
+            showMessage(
+                "Something went wrong: " +
+                error.message,
+                "error"
+            );
+
+            registerButton.disabled = false;
+
+            registerButton.innerText =
+                "CREATE ACCOUNT";
+
+        }
+
+    }
+);
+
+
+
+function showMessage(text,type){
+
+    message.style.display = "block";
+
+    message.innerText = text;
+
+
+    if(type === "error"){
+
+        message.style.background = "#ffe5e5";
+
+        message.style.color = "#b00020";
+
     }
 
-    const { data, error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: password
-    });
 
-    if (error) {
-        alert("SUPABASE ERROR: " + error.message);
-        return;
+    if(type === "success"){
+
+        message.style.background = "#e5ffe9";
+
+        message.style.color = "#087f23";
+
     }
 
-    if (!data.user) {
-        alert("Registration started. Please check your email.");
-        return;
-    }
+}
 
-    alert("Registration successful! Check your email and verify your account.");
-
-    document.getElementById("registerForm").reset();
-
-});
 
 </script>
 
+
 </body>
+
 </html>
