@@ -1,206 +1,364 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>Login - CHAND INSTITUTE OF TECHNOLOGY</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<title>Student Login - CHAND COMPUTER COURSE</title>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-<style>
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        .header {
+            background: #123c69;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
 
-body{
-    font-family:Arial,sans-serif;
-    background:#f4f7fb;
-    min-height:100vh;
-}
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
 
-header{
-    background:#123c69;
-    color:white;
-    padding:25px 15px;
-    text-align:center;
-}
+        .header p {
+            font-size: 15px;
+            opacity: 0.9;
+        }
 
-header h1{
-    font-size:26px;
-    margin-bottom:10px;
-}
+        .login-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            padding: 35px;
+        }
 
-header a{
-    color:white;
-    text-decoration:none;
-}
+        .login-box {
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 28px;
+            background: #fff;
+        }
 
-.container{
-    width:100%;
-    max-width:500px;
-    margin:50px auto;
-    padding:20px;
-}
+        .student-box {
+            border-top: 5px solid #198754;
+        }
 
-.login-box{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 4px 20px rgba(0,0,0,0.12);
-}
+        .admin-box {
+            border-top: 5px solid #123c69;
+        }
 
-.login-box h2{
-    text-align:center;
-    color:#123c69;
-    margin-bottom:25px;
-}
+        .login-title {
+            text-align: center;
+            margin-bottom: 22px;
+        }
 
-label{
-    display:block;
-    font-weight:bold;
-    margin-top:18px;
-    margin-bottom:8px;
-}
+        .login-title .icon {
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
 
-input{
-    width:100%;
-    padding:14px;
-    border:1px solid #ccc;
-    border-radius:7px;
-    font-size:16px;
-}
+        .login-title h2 {
+            color: #123c69;
+            margin-bottom: 5px;
+        }
 
-button{
-    width:100%;
-    padding:14px;
-    margin-top:25px;
-    background:#123c69;
-    color:white;
-    border:none;
-    border-radius:7px;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-}
+        .student-box .login-title h2 {
+            color: #198754;
+        }
 
-button:disabled{
-    background:#777;
-}
+        .login-title p {
+            color: #666;
+            font-size: 14px;
+        }
 
-.message{
-    display:none;
-    margin-top:18px;
-    padding:12px;
-    border-radius:7px;
-    text-align:center;
-}
+        .form-group {
+            margin-bottom: 18px;
+        }
 
-.register-link{
-    text-align:center;
-    margin-top:22px;
-}
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
 
-.register-link a{
-    color:#123c69;
-    font-weight:bold;
-    text-decoration:none;
-}
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
 
-</style>
+        input:focus {
+            border-color: #123c69;
+            box-shadow: 0 0 0 2px rgba(18, 60, 105, 0.1);
+        }
 
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 45px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 19px;
+            user-select: none;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            padding: 13px;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .student-button {
+            background: #198754;
+        }
+
+        .student-button:hover {
+            background: #157347;
+        }
+
+        .admin-button {
+            background: #123c69;
+        }
+
+        .admin-button:hover {
+            background: #0d2d50;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 7px;
+            display: none;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .error {
+            display: block;
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .success {
+            display: block;
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .register-link {
+            text-align: center;
+            padding: 0 20px 30px;
+            color: #555;
+        }
+
+        .register-link a {
+            color: #123c69;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: none;
+        }
+
+        @media (max-width: 700px) {
+            .login-area {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-
-<header>
-
-<h1>CHAND COMPUTER COURSE</h1>
-
-<p>
-<a href="index.html">← Back to Home</a>
-</p>
-
-</header>
-
-
 <div class="container">
 
-<div class="login-box">
+    <div class="header">
+        <h1>CHAND INSTITUTE OF TECHNOLOGY</h1>
+        <p>Online Learning Platform</p>
+    </div>
 
-<h2>Student Login</h2>
+    <div class="login-area">
+
+        <!-- ================= STUDENT LOGIN ================= -->
+        <div class="login-box student-box">
+
+            <div class="login-title">
+                <div class="icon">👨‍🎓</div>
+                <h2>Student Login</h2>
+                <p>Login to access your student account</p>
+            </div>
+
+            <form id="studentLoginForm">
+
+                <div class="form-group">
+                    <label for="studentEmail">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="studentEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="studentPassword">Password</label>
+
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="studentPassword"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <span
+                            class="toggle-password"
+                            onclick="togglePassword('studentPassword', this)"
+                        >👁️</span>
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    id="studentLoginButton"
+                    class="student-button"
+                >
+                    LOGIN AS STUDENT
+                </button>
+
+                <div id="studentMessage" class="message"></div>
+
+            </form>
+        </div>
 
 
-<form id="loginForm">
+        <!-- ================= ADMIN LOGIN ================= -->
+        <div class="login-box admin-box">
+
+            <div class="login-title">
+                <div class="icon">👨‍💼</div>
+                <h2>Admin Login</h2>
+                <p>Login to manage the learning platform</p>
+            </div>
+
+            <form id="adminLoginForm">
+
+                <div class="form-group">
+                    <label for="adminEmail">Admin Email</label>
+
+                    <input
+                        type="email"
+                        id="adminEmail"
+                        placeholder="Enter admin email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password</label>
+
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="adminPassword"
+                            placeholder="Enter admin password"
+                            required
+                        >
+
+                        <span
+                            class="toggle-password"
+                            onclick="togglePassword('adminPassword', this)"
+                        >👁️</span>
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    id="adminLoginButton"
+                    class="admin-button"
+                >
+                    LOGIN AS ADMIN
+                </button>
+
+                <div id="adminMessage" class="message"></div>
+
+            </form>
+        </div>
+
+    </div>
 
 
-<label for="email">
-Email Address
-</label>
-
-<input
-    type="email"
-    id="email"
-    placeholder="Enter your email"
-    required
->
-
-
-<label for="password">
-Password
-</label>
-
-<input
-    type="password"
-    id="password"
-    placeholder="Enter your password"
-    required
->
-
-
-<button
-    type="submit"
-    id="loginButton"
->
-LOGIN
-</button>
-
-
-<div
-    id="message"
-    class="message"
-></div>
-
-
-</form>
-
-
-<div class="register-link">
-
-<p>
-Don't have an account?
-</p>
-
-<br>
-
-<a href="register.html">
-Create Account
-</a>
+    <!-- REGISTER -->
+    <div class="register-link">
+        <p>
+            Don't have a student account?
+            <a href="register.html">Register as Student</a>
+        </p>
+    </div>
 
 </div>
 
 
-</div>
-
-</div>
-
-
+<!-- ================= SUPABASE ================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -209,218 +367,335 @@ Create Account
 
 <script>
 
+    // ==========================================
+    // PASSWORD SHOW / HIDE
+    // ==========================================
 
-const loginForm =
-    document.getElementById("loginForm");
+    function togglePassword(inputId, icon) {
 
-const loginButton =
-    document.getElementById("loginButton");
+        const input = document.getElementById(inputId);
 
-const message =
-    document.getElementById("message");
+        if (input.type === "password") {
 
+            input.type = "text";
+            icon.textContent = "🙈";
 
+        } else {
 
-loginForm.addEventListener(
-    "submit",
-    async function(event){
-
-        event.preventDefault();
-
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const password =
-            document.getElementById("password").value;
+            input.type = "password";
+            icon.textContent = "👁️";
+        }
+    }
 
 
-        loginButton.disabled = true;
+    // ==========================================
+    // SHOW MESSAGE
+    // ==========================================
 
-        loginButton.innerText =
-            "LOGGING IN...";
+    function showMessage(elementId, message, type) {
 
+        const element = document.getElementById(elementId);
 
-        try{
+        element.textContent = message;
 
-
-            /* LOGIN */
-
-            const {
-                data,
-                error
-            } =
-            await supabaseClient.auth.signInWithPassword({
-
-                email: email,
-
-                password: password
-
-            });
+        element.className = "message " + type;
+    }
 
 
-            if(error){
+    // ==========================================
+    // RESET BUTTON
+    // ==========================================
 
-                showMessage(
-                    "LOGIN ERROR: " +
-                    error.message,
-                    "error"
-                );
+    function resetButton(buttonId, text) {
 
-                resetButton();
+        const button = document.getElementById(buttonId);
 
-                return;
+        button.disabled = false;
 
-            }
-
-
-            const user = data.user;
+        button.textContent = text;
+    }
 
 
-            if(!user){
+    // ==========================================
+    // STUDENT LOGIN
+    // ==========================================
 
-                showMessage(
-                    "Login failed. Please try again.",
-                    "error"
-                );
+    document
+        .getElementById("studentLoginForm")
+        .addEventListener("submit", async function(event) {
 
-                resetButton();
+            event.preventDefault();
 
-                return;
+            const email =
+                document
+                .getElementById("studentEmail")
+                .value
+                .trim();
 
-            }
+            const password =
+                document
+                .getElementById("studentPassword")
+                .value;
 
+            const button =
+                document.getElementById("studentLoginButton");
 
-            /*
-             GET STUDENT INFORMATION
-             FROM REGISTRATION METADATA
-            */
+            button.disabled = true;
+            button.textContent = "LOGGING IN...";
 
-            const metadata =
-                user.user_metadata || {};
-
-
-            const fullName =
-                metadata.full_name || "";
-
-            const phone =
-                metadata.phone || "";
-
-            const course =
-                metadata.course || "";
+            document.getElementById("studentMessage").className = "message";
 
 
+            try {
 
-            /*
-             SAVE INFORMATION
-             INTO PROFILES TABLE
-            */
-
-            const {
-                error: profileError
-            } =
-            await supabaseClient
-                .from("profiles")
-                .upsert({
-
-                    id: user.id,
-
-                    full_name: fullName,
-
-                    phone: phone,
-
-                    course: course
-
+                // LOGIN TO SUPABASE
+                const {
+                    data,
+                    error
+                } = await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
                 });
 
 
-            if(profileError){
+                if (error) {
+                    throw error;
+                }
 
-                console.log(
-                    "Profile error:",
-                    profileError
+
+                const user = data.user;
+
+
+                if (!user) {
+                    throw new Error("User account not found.");
+                }
+
+
+                // GET PROFILE
+                const {
+                    data: profile,
+                    error: profileError
+                } = await supabaseClient
+                    .from("profiles")
+                    .select("full_name, phone, course, role")
+                    .eq("id", user.id)
+                    .maybeSingle();
+
+
+                if (profileError) {
+                    throw profileError;
+                }
+
+
+                // IF PROFILE DOES NOT EXIST,
+                // CREATE STUDENT PROFILE
+
+                if (!profile) {
+
+                    const fullName =
+                        user.user_metadata?.full_name || "";
+
+                    const phone =
+                        user.user_metadata?.phone || "";
+
+                    const course =
+                        user.user_metadata?.course || "";
+
+
+                    const {
+                        error: insertError
+                    } = await supabaseClient
+                        .from("profiles")
+                        .insert({
+                            id: user.id,
+                            full_name: fullName,
+                            phone: phone,
+                            course: course
+                        });
+
+
+                    if (insertError) {
+                        throw insertError;
+                    }
+                }
+
+
+                // GET ROLE AGAIN
+                const {
+                    data: roleData,
+                    error: roleError
+                } = await supabaseClient
+                    .from("profiles")
+                    .select("role")
+                    .eq("id", user.id)
+                    .single();
+
+
+                if (roleError) {
+                    throw roleError;
+                }
+
+
+                // STUDENT LOGIN MUST BE STUDENT
+                if (roleData.role !== "student") {
+
+                    await supabaseClient.auth.signOut();
+
+                    throw new Error(
+                        "This account is not a Student account. Please use Admin Login."
+                    );
+                }
+
+
+                showMessage(
+                    "studentMessage",
+                    "Login successful. Opening Student Dashboard...",
+                    "success"
                 );
 
+
+                setTimeout(function() {
+
+                    window.location.href = "dashboard.html";
+
+                }, 800);
+
+
+            } catch (error) {
+
+                console.error("Student Login Error:", error);
+
+                showMessage(
+                    "studentMessage",
+                    error.message || "Student login failed.",
+                    "error"
+                );
+
+                resetButton(
+                    "studentLoginButton",
+                    "LOGIN AS STUDENT"
+                );
             }
 
-
-            showMessage(
-                "Login successful! Opening dashboard...",
-                "success"
-            );
+        });
 
 
-            setTimeout(function(){
+    // ==========================================
+    // ADMIN LOGIN
+    // ==========================================
 
-                window.location.href =
-                    "dashboard.html";
+    document
+        .getElementById("adminLoginForm")
+        .addEventListener("submit", async function(event) {
 
-            },1500);
+            event.preventDefault();
 
+            const email =
+                document
+                .getElementById("adminEmail")
+                .value
+                .trim();
 
-        }
+            const password =
+                document
+                .getElementById("adminPassword")
+                .value;
 
-        catch(error){
+            const button =
+                document.getElementById("adminLoginButton");
 
-            showMessage(
-                "Something went wrong: " +
-                error.message,
-                "error"
-            );
+            button.disabled = true;
+            button.textContent = "LOGGING IN...";
 
-            resetButton();
-
-        }
-
-    }
-);
-
-
-
-function resetButton(){
-
-    loginButton.disabled = false;
-
-    loginButton.innerText = "LOGIN";
-
-}
+            document.getElementById("adminMessage").className = "message";
 
 
+            try {
 
-function showMessage(text,type){
-
-    message.style.display = "block";
-
-    message.innerText = text;
-
-
-    if(type === "error"){
-
-        message.style.background =
-            "#ffe5e5";
-
-        message.style.color =
-            "#b00020";
-
-    }
+                // LOGIN TO SUPABASE
+                const {
+                    data,
+                    error
+                } = await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
 
 
-    if(type === "success"){
+                if (error) {
+                    throw error;
+                }
 
-        message.style.background =
-            "#e5ffe9";
 
-        message.style.color =
-            "#087f23";
+                const user = data.user;
 
-    }
 
-}
+                if (!user) {
+                    throw new Error("Admin account not found.");
+                }
 
+
+                // GET PROFILE ROLE
+                const {
+                    data: profile,
+                    error: profileError
+                } = await supabaseClient
+                    .from("profiles")
+                    .select("full_name, role")
+                    .eq("id", user.id)
+                    .maybeSingle();
+
+
+                if (profileError) {
+                    throw profileError;
+                }
+
+
+                // CHECK ADMIN ROLE
+                if (!profile || profile.role !== "admin") {
+
+                    await supabaseClient.auth.signOut();
+
+                    throw new Error(
+                        "Access denied. This account is not an Admin account."
+                    );
+                }
+
+
+                showMessage(
+                    "adminMessage",
+                    "Admin login successful. Opening Admin Dashboard...",
+                    "success"
+                );
+
+
+                setTimeout(function() {
+
+                    window.location.href = "admin.html";
+
+                }, 800);
+
+
+            } catch (error) {
+
+                console.error("Admin Login Error:", error);
+
+                showMessage(
+                    "adminMessage",
+                    error.message || "Admin login failed.",
+                    "error"
+                );
+
+                resetButton(
+                    "adminLoginButton",
+                    "LOGIN AS ADMIN"
+                );
+            }
+
+        });
 
 </script>
 
-
 </body>
-
 </html>
+```
