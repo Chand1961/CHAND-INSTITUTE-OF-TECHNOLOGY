@@ -21,20 +21,35 @@
 
         body {
             font-family: Arial, sans-serif;
-            color: #222;
+            min-height: 100vh;
+            color: white;
 
-            /* SAME IMAGE THROUGH THE WHOLE PAGE */
-            background-image:
-                linear-gradient(
-                    rgba(0, 20, 40, 0.55),
-                    rgba(0, 20, 40, 0.55)
-                ),
-                url("hero-computer-class.jpg.png");
-
+            /* ONE BACKGROUND FOR THE WHOLE PAGE */
+            background-image: url("hero-computer-class.jpg.png");
             background-size: cover;
-            background-position: center;
+            background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+
+            position: relative;
+        }
+
+        /* ONE OPACITY / OVERLAY FOR THE WHOLE PAGE */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0, 20, 40, 0.55);
+
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Put all page content above the overlay */
+        body > * {
+            position: relative;
+            z-index: 1;
         }
 
 
@@ -44,32 +59,41 @@
 
         header {
             background: rgba(18, 60, 105, 0.95);
-            color: white;
-            padding: 15px 40px;
 
             display: flex;
             justify-content: space-between;
             align-items: center;
 
+            padding: 18px 7%;
+
             position: sticky;
             top: 0;
+
             z-index: 1000;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .logo {
             font-size: 22px;
             font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
             font-weight: bold;
+            transition: 0.3s;
         }
 
         nav a:hover {
-            color: #ffd166;
+            color: #ffd700;
         }
 
 
@@ -78,132 +102,122 @@
         ========================= */
 
         .hero {
-            min-height: calc(100vh - 70px);
-            width: 100%;
+            min-height: 650px;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
             text-align: center;
-            color: white;
 
-            padding: 70px 20px;
+            padding: 80px 20px;
 
-            /* SAME TRANSPARENT EFFECT AS BEFORE */
-            background:
-                linear-gradient(
-                    rgba(0, 20, 40, 0.35),
-                    rgba(0, 20, 40, 0.35)
-                );
+            /* IMPORTANT:
+               NO background here.
+               The page background remains visible.
+            */
+            background: transparent;
         }
 
         .hero-content {
-            max-width: 1000px;
-            padding: 25px;
+            max-width: 900px;
+
+            background: rgba(0, 0, 0, 0.18);
+
+            padding: 45px 35px;
+
+            border-radius: 15px;
+
+            text-shadow: 0 2px 5px rgba(0,0,0,0.7);
         }
 
         .hero h1 {
-            font-size: 55px;
-            margin-bottom: 18px;
-
-            text-shadow:
-                2px 2px 10px rgba(0,0,0,0.9);
+            font-size: 48px;
+            margin-bottom: 15px;
         }
 
         .motto {
-            font-size: 23px;
+            font-size: 20px;
             font-weight: bold;
-            color: #ffd166;
-            margin-bottom: 28px;
+            color: #ffd700;
+            margin-bottom: 30px;
         }
 
         .hero h2 {
             font-size: 32px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .hero p {
-            max-width: 800px;
-            margin: 0 auto 30px auto;
-
-            font-size: 19px;
+            font-size: 18px;
             line-height: 1.7;
+            margin-bottom: 30px;
         }
 
-
-        /* =========================
-           BUTTONS
-        ========================= */
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
         .hero-buttons a {
             display: inline-block;
 
-            padding: 15px 30px;
-            margin: 8px;
+            padding: 14px 28px;
 
             border-radius: 8px;
 
             text-decoration: none;
+
             font-weight: bold;
 
             transition: 0.3s;
         }
 
         .register-btn {
-            background: #ffd166;
+            background: #ffd700;
             color: #123c69;
+        }
+
+        .register-btn:hover {
+            background: white;
+            transform: translateY(-3px);
         }
 
         .login-btn {
-            background: white;
-            color: #123c69;
+            background: #123c69;
+            color: white;
+            border: 2px solid white;
         }
 
-        .hero-buttons a:hover {
-            transform: translateY(-4px);
-            opacity: 0.9;
+        .login-btn:hover {
+            background: white;
+            color: #123c69;
+            transform: translateY(-3px);
         }
 
 
         /* =========================
-           COURSES
+           SECTIONS
         ========================= */
 
         .section {
+            padding: 80px 7%;
 
-            width: 100%;
-            max-width: 1200px;
-
-            margin: auto;
-
-            padding: 70px 30px;
-
-            /* TRANSPARENT LIKE HERO */
-            background: rgba(255, 255, 255, 0.35);
+            /* NO separate background */
+            background: transparent;
         }
 
-        .section-title {
+        .section h2,
+        .about h2 {
             text-align: center;
 
-            font-size: 34px;
+            font-size: 36px;
 
-            color: white;
+            margin-bottom: 50px;
 
-            margin-bottom: 40px;
-
-            text-shadow:
-                2px 2px 6px rgba(0,0,0,0.8);
-        }
-
-        .courses {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(250px, 1fr));
-
-            gap: 25px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
         }
 
 
@@ -211,43 +225,50 @@
            COURSE CARDS
         ========================= */
 
-        .course-card {
+        .courses {
+            display: grid;
 
-            /* SLIGHTLY TRANSPARENT */
-            background: rgba(255, 255, 255, 0.82);
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+
+            gap: 25px;
+
+            max-width: 1200px;
+
+            margin: auto;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.94);
+
+            color: #222;
 
             padding: 30px;
 
             border-radius: 12px;
 
-            box-shadow:
-                0 5px 18px rgba(0,0,0,0.20);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 
             transition: 0.3s;
         }
 
         .course-card:hover {
-
-            transform: translateY(-6px);
+            transform: translateY(-8px);
 
             box-shadow:
-                0 10px 25px rgba(0,0,0,0.25);
+                0 12px 30px rgba(0,0,0,0.4);
         }
 
         .course-card h3 {
-
             color: #123c69;
 
-            margin-bottom: 12px;
+            font-size: 22px;
 
-            font-size: 21px;
+            margin-bottom: 15px;
         }
 
         .course-card p {
-
             line-height: 1.6;
-
-            color: #444;
         }
 
 
@@ -256,27 +277,24 @@
         ========================= */
 
         .about {
+            padding: 90px 7%;
 
-            /* SAME TRANSPARENT EFFECT */
-            background: rgba(255, 255, 255, 0.35);
+            /* NO SEPARATE BACKGROUND */
+            background: transparent;
 
             text-align: center;
         }
 
-        .about p {
-
-            max-width: 850px;
+        .about-content {
+            max-width: 900px;
 
             margin: auto;
 
+            font-size: 18px;
+
             line-height: 1.8;
 
-            color: white;
-
-            font-size: 17px;
-
-            text-shadow:
-                1px 1px 5px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
 
 
@@ -285,18 +303,18 @@
         ========================= */
 
         footer {
-
-            background: rgba(18, 60, 105, 0.90);
-
-            color: white;
+            background: rgba(18, 60, 105, 0.92);
 
             text-align: center;
 
-            padding: 25px;
+            padding: 30px 20px;
+
+            line-height: 1.8;
         }
 
-        footer p {
-            margin: 6px;
+        footer .motto {
+            margin: 5px 0 0;
+            font-size: 16px;
         }
 
 
@@ -307,75 +325,83 @@
         @media (max-width: 768px) {
 
             header {
-
-                padding: 15px 20px;
-
                 flex-direction: column;
 
-                gap: 12px;
+                gap: 15px;
+
+                padding: 15px 20px;
             }
 
             .logo {
-
-                font-size: 18px;
-
                 text-align: center;
+                font-size: 18px;
+            }
+
+            nav {
+                gap: 15px;
             }
 
             nav a {
-
-                margin: 0 7px;
-
                 font-size: 14px;
             }
 
             .hero {
+                min-height: 600px;
 
-                min-height: calc(100vh - 110px);
+                padding: 60px 15px;
+            }
 
-                padding: 50px 15px;
+            .hero-content {
+                padding: 35px 20px;
             }
 
             .hero h1 {
-
-                font-size: 35px;
-            }
-
-            .motto {
-
-                font-size: 18px;
+                font-size: 32px;
             }
 
             .hero h2 {
-
-                font-size: 24px;
+                font-size: 25px;
             }
 
             .hero p {
-
                 font-size: 16px;
             }
 
-            .section {
-
-                padding: 50px 20px;
+            .motto {
+                font-size: 17px;
             }
 
-            .section-title {
+            .section h2,
+            .about h2 {
+                font-size: 29px;
+            }
 
-                font-size: 28px;
+            .section {
+                padding: 60px 20px;
+            }
+
+            .about {
+                padding: 60px 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons a {
+                width: 100%;
             }
         }
 
     </style>
-
 </head>
-
 
 <body>
 
 
-    <!-- HEADER -->
+    <!-- =========================
+         HEADER
+    ========================= -->
 
     <header>
 
@@ -385,19 +411,26 @@
 
         <nav>
 
-            <a href="index.html">Home</a>
+            <a href="index.html">
+                Home
+            </a>
 
-            <a href="register.html">Register</a>
+            <a href="register.html">
+                Register
+            </a>
 
-            <a href="login.html">Login</a>
+            <a href="login.html">
+                Login
+            </a>
 
         </nav>
 
     </header>
 
 
-
-    <!-- HERO -->
+    <!-- =========================
+         HERO
+    ========================= -->
 
     <section class="hero">
 
@@ -417,23 +450,24 @@
 
             <p>
                 Gain practical computer and technology skills
-                through flexible online learning.
-
-                Study from your home, school, office or anywhere
-                with an internet connection.
+                through flexible online learning. Study from
+                your home, school, office or anywhere with
+                an internet connection.
             </p>
 
             <div class="hero-buttons">
 
                 <a
                     href="register.html"
-                    class="register-btn">
+                    class="register-btn"
+                >
                     REGISTER NOW
                 </a>
 
                 <a
                     href="login.html"
-                    class="login-btn">
+                    class="login-btn"
+                >
                     STUDENT LOGIN
                 </a>
 
@@ -444,12 +478,13 @@
     </section>
 
 
+    <!-- =========================
+         OUR COURSES
+    ========================= -->
 
-    <!-- COURSES -->
+    <section class="section" id="courses">
 
-    <section class="section">
-
-        <h2 class="section-title">
+        <h2>
             Our Courses
         </h2>
 
@@ -464,8 +499,8 @@
 
                 <p>
                     Learn essential computer skills including
-                    computer operation, files, folders and basic
-                    digital skills.
+                    computer operation, files, folders and
+                    basic digital skills.
                 </p>
 
             </div>
@@ -479,7 +514,8 @@
 
                 <p>
                     Learn Microsoft Word, Excel, PowerPoint,
-                    Access and other important office applications.
+                    Access and other important office
+                    applications.
                 </p>
 
             </div>
@@ -534,43 +570,55 @@
                 </h3>
 
                 <p>
-                    Learn internet technologies, online services,
-                    digital communication and safe internet use.
+                    Learn internet technologies, online
+                    services, digital communication and
+                    safe internet use.
                 </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
+    <!-- =========================
+         ABOUT
+    ========================= -->
 
-    <!-- ABOUT -->
+    <section class="about" id="about">
 
-    <section class="section about">
-
-        <h2 class="section-title">
+        <h2>
             About CHAND INSTITUTE OF TECHNOLOGY
         </h2>
 
-        <p>
+        <div class="about-content">
 
-            CHAND INSTITUTE OF TECHNOLOGY is an online learning
-            platform designed to help students and other learners
-            develop practical computer and technology skills.
+            <p>
+                CHAND INSTITUTE OF TECHNOLOGY is an online
+                learning platform designed to help students
+                and other learners develop practical computer
+                and technology skills.
+            </p>
 
-            Our goal is to make technology education accessible,
-            flexible and practical so that learners can study
-            from different locations using the internet.
+            <br>
 
-        </p>
+            <p>
+                Our goal is to make technology education
+                accessible, flexible and practical so that
+                learners can study from different locations
+                using the internet.
+            </p>
+
+        </div>
 
     </section>
 
 
-
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
     <footer>
 
@@ -578,26 +626,24 @@
             © 2026 CHAND INSTITUTE OF TECHNOLOGY
         </p>
 
-        <p>
+        <div class="motto">
             Learn • Practice • Innovate • Succeed
-        </p>
+        </div>
 
     </footer>
 
 
-
-    <!-- SUPABASE -->
+    <!-- =========================
+         SUPABASE
+    ========================= -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script src="js/supabase.js"></script>
 
-    <!-- VISITOR TRACKING -->
-
     <script src="js/visitor.js"></script>
 
 
 </body>
-
 </html>
 ```
