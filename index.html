@@ -20,12 +20,10 @@
         }
 
         body {
-
             font-family: Arial, sans-serif;
-
             color: #222;
 
-            /* FULL PAGE BACKGROUND */
+            /* SAME IMAGE THROUGH THE WHOLE PAGE */
             background-image:
                 linear-gradient(
                     rgba(0, 20, 40, 0.55),
@@ -34,11 +32,8 @@
                 url("hero-computer-class.jpg.png");
 
             background-size: cover;
-
             background-position: center;
-
             background-repeat: no-repeat;
-
             background-attachment: fixed;
         }
 
@@ -48,49 +43,32 @@
         ========================= */
 
         header {
-
             background: rgba(18, 60, 105, 0.95);
-
             color: white;
-
             padding: 15px 40px;
 
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
 
             position: sticky;
-
             top: 0;
-
             z-index: 1000;
         }
 
-
         .logo {
-
             font-size: 22px;
-
             font-weight: bold;
         }
-
 
         nav a {
-
             color: white;
-
             text-decoration: none;
-
             margin-left: 20px;
-
             font-weight: bold;
         }
 
-
         nav a:hover {
-
             color: #ffd166;
         }
 
@@ -100,82 +78,57 @@
         ========================= */
 
         .hero {
-
             min-height: calc(100vh - 70px);
-
             width: 100%;
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             text-align: center;
-
             color: white;
 
             padding: 70px 20px;
 
+            /* SAME TRANSPARENT EFFECT AS BEFORE */
             background:
-
                 linear-gradient(
                     rgba(0, 20, 40, 0.35),
                     rgba(0, 20, 40, 0.35)
                 );
         }
 
-
         .hero-content {
-
             max-width: 1000px;
-
             padding: 25px;
         }
 
-
         .hero h1 {
-
             font-size: 55px;
-
             margin-bottom: 18px;
 
             text-shadow:
                 2px 2px 10px rgba(0,0,0,0.9);
         }
 
-
         .motto {
-
             font-size: 23px;
-
             font-weight: bold;
-
             color: #ffd166;
-
             margin-bottom: 28px;
         }
 
-
         .hero h2 {
-
             font-size: 32px;
-
             margin-bottom: 18px;
         }
 
-
         .hero p {
-
             max-width: 800px;
-
-            margin: auto;
+            margin: 0 auto 30px auto;
 
             font-size: 19px;
-
             line-height: 1.7;
-
-            margin-bottom: 30px;
         }
 
 
@@ -184,43 +137,31 @@
         ========================= */
 
         .hero-buttons a {
-
             display: inline-block;
 
             padding: 15px 30px;
-
             margin: 8px;
 
             border-radius: 8px;
 
             text-decoration: none;
-
             font-weight: bold;
 
             transition: 0.3s;
         }
 
-
         .register-btn {
-
             background: #ffd166;
-
             color: #123c69;
         }
-
 
         .login-btn {
-
             background: white;
-
             color: #123c69;
         }
 
-
         .hero-buttons a:hover {
-
             transform: translateY(-4px);
-
             opacity: 0.9;
         }
 
@@ -232,28 +173,28 @@
         .section {
 
             width: 100%;
-
             max-width: 1200px;
 
             margin: auto;
 
             padding: 70px 30px;
 
-            background: rgba(255, 255, 255, 0.88);
+            /* TRANSPARENT LIKE HERO */
+            background: rgba(255, 255, 255, 0.35);
         }
 
-
         .section-title {
-
             text-align: center;
 
             font-size: 34px;
 
-            color: #123c69;
+            color: white;
 
             margin-bottom: 40px;
-        }
 
+            text-shadow:
+                2px 2px 6px rgba(0,0,0,0.8);
+        }
 
         .courses {
 
@@ -266,29 +207,32 @@
         }
 
 
+        /* =========================
+           COURSE CARDS
+        ========================= */
+
         .course-card {
 
-            background: rgba(255, 255, 255, 0.96);
+            /* SLIGHTLY TRANSPARENT */
+            background: rgba(255, 255, 255, 0.82);
 
             padding: 30px;
 
             border-radius: 12px;
 
             box-shadow:
-                0 5px 18px rgba(0,0,0,0.15);
+                0 5px 18px rgba(0,0,0,0.20);
 
             transition: 0.3s;
         }
-
 
         .course-card:hover {
 
             transform: translateY(-6px);
 
             box-shadow:
-                0 10px 25px rgba(0,0,0,0.2);
+                0 10px 25px rgba(0,0,0,0.25);
         }
-
 
         .course-card h3 {
 
@@ -299,12 +243,11 @@
             font-size: 21px;
         }
 
-
         .course-card p {
 
             line-height: 1.6;
 
-            color: #555;
+            color: #444;
         }
 
 
@@ -314,13 +257,11 @@
 
         .about {
 
-            background: rgba(255, 255, 255, 0.90);
+            /* SAME TRANSPARENT EFFECT */
+            background: rgba(255, 255, 255, 0.35);
 
             text-align: center;
-
-            margin-top: 0;
         }
-
 
         .about p {
 
@@ -330,9 +271,12 @@
 
             line-height: 1.8;
 
-            color: #444;
+            color: white;
 
             font-size: 17px;
+
+            text-shadow:
+                1px 1px 5px rgba(0,0,0,0.8);
         }
 
 
@@ -342,7 +286,7 @@
 
         footer {
 
-            background: rgba(18, 60, 105, 0.95);
+            background: rgba(18, 60, 105, 0.90);
 
             color: white;
 
@@ -351,9 +295,7 @@
             padding: 25px;
         }
 
-
         footer p {
-
             margin: 6px;
         }
 
@@ -373,14 +315,12 @@
                 gap: 12px;
             }
 
-
             .logo {
 
                 font-size: 18px;
 
                 text-align: center;
             }
-
 
             nav a {
 
@@ -389,7 +329,6 @@
                 font-size: 14px;
             }
 
-
             .hero {
 
                 min-height: calc(100vh - 110px);
@@ -397,36 +336,30 @@
                 padding: 50px 15px;
             }
 
-
             .hero h1 {
 
                 font-size: 35px;
             }
-
 
             .motto {
 
                 font-size: 18px;
             }
 
-
             .hero h2 {
 
                 font-size: 24px;
             }
-
 
             .hero p {
 
                 font-size: 16px;
             }
 
-
             .section {
 
                 padding: 50px 20px;
             }
-
 
             .section-title {
 
@@ -442,32 +375,21 @@
 <body>
 
 
-    <!-- =========================
-         HEADER
-    ========================= -->
+    <!-- HEADER -->
 
     <header>
 
         <div class="logo">
-
             CHAND INSTITUTE OF TECHNOLOGY
-
         </div>
-
 
         <nav>
 
-            <a href="index.html">
-                Home
-            </a>
+            <a href="index.html">Home</a>
 
-            <a href="register.html">
-                Register
-            </a>
+            <a href="register.html">Register</a>
 
-            <a href="login.html">
-                Login
-            </a>
+            <a href="login.html">Login</a>
 
         </nav>
 
@@ -475,9 +397,7 @@
 
 
 
-    <!-- =========================
-         HERO
-    ========================= -->
+    <!-- HERO -->
 
     <section class="hero">
 
@@ -487,49 +407,34 @@
                 CHAND INSTITUTE OF TECHNOLOGY
             </h1>
 
-
             <div class="motto">
-
                 Learn • Practice • Innovate • Succeed
-
             </div>
 
-
             <h2>
-
                 Learn Computer Skills Online
-
             </h2>
 
-
             <p>
-
                 Gain practical computer and technology skills
                 through flexible online learning.
 
                 Study from your home, school, office or anywhere
                 with an internet connection.
-
             </p>
-
 
             <div class="hero-buttons">
 
                 <a
                     href="register.html"
                     class="register-btn">
-
                     REGISTER NOW
-
                 </a>
-
 
                 <a
                     href="login.html"
                     class="login-btn">
-
                     STUDENT LOGIN
-
                 </a>
 
             </div>
@@ -540,18 +445,13 @@
 
 
 
-    <!-- =========================
-         COURSES
-    ========================= -->
+    <!-- COURSES -->
 
     <section class="section">
 
         <h2 class="section-title">
-
             Our Courses
-
         </h2>
-
 
         <div class="courses">
 
@@ -563,15 +463,12 @@
                 </h3>
 
                 <p>
-
                     Learn essential computer skills including
                     computer operation, files, folders and basic
                     digital skills.
-
                 </p>
 
             </div>
-
 
 
             <div class="course-card">
@@ -581,14 +478,11 @@
                 </h3>
 
                 <p>
-
                     Learn Microsoft Word, Excel, PowerPoint,
                     Access and other important office applications.
-
                 </p>
 
             </div>
-
 
 
             <div class="course-card">
@@ -598,14 +492,11 @@
                 </h3>
 
                 <p>
-
                     Learn HTML, CSS and the fundamentals of
                     creating modern websites.
-
                 </p>
 
             </div>
-
 
 
             <div class="course-card">
@@ -615,14 +506,11 @@
                 </h3>
 
                 <p>
-
                     Learn how websites work and how to build
                     interactive web applications.
-
                 </p>
 
             </div>
-
 
 
             <div class="course-card">
@@ -632,14 +520,11 @@
                 </h3>
 
                 <p>
-
                     Learn graphic design, digital creativity,
                     multimedia and visual communication.
-
                 </p>
 
             </div>
-
 
 
             <div class="course-card">
@@ -649,14 +534,11 @@
                 </h3>
 
                 <p>
-
                     Learn internet technologies, online services,
                     digital communication and safe internet use.
-
                 </p>
 
             </div>
-
 
         </div>
 
@@ -664,18 +546,13 @@
 
 
 
-    <!-- =========================
-         ABOUT
-    ========================= -->
+    <!-- ABOUT -->
 
     <section class="section about">
 
         <h2 class="section-title">
-
             About CHAND INSTITUTE OF TECHNOLOGY
-
         </h2>
-
 
         <p>
 
@@ -693,9 +570,7 @@
 
 
 
-    <!-- =========================
-         FOOTER
-    ========================= -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -711,15 +586,13 @@
 
 
 
-    <!-- =========================
-         SUPABASE
-    ========================= -->
+    <!-- SUPABASE -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script src="js/supabase.js"></script>
 
-    <!-- Visitor Tracking -->
+    <!-- VISITOR TRACKING -->
 
     <script src="js/visitor.js"></script>
 
